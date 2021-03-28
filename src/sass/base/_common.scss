@@ -16,23 +16,16 @@ img {
   height: auto;
 }
 .section {
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-@media screen and (min-width: 1200px) {
-  .section {
-    padding-top: 94px;
-    padding-bottom: 94px;
-  }
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
 .list {
-  list-style: none;
+    list-style: none;
 }
 
-.link {
-  text-decoration: none;
-}
-
-.address {
-  font-style: normal;
+@media screen and (min-width: 768px) {
+  .section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
 }

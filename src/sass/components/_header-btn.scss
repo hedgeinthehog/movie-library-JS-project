@@ -1,0 +1,21 @@
+.header-btn{
+    display: block;
+    margin: 0 auto;
+//   font-family: $main-font;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.333;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    // letter-spacing: 0.06em;
+    // color: $white-color;
+    min-width: 130px;
+    height: 44px;
+    // background-color: rgba(0, 0, 0, 0.56);
+    border: none;
+    // border-radius: 3px;
+    padding: 14px 36px 12px 36px;
+    cursor: pointer;
+}
