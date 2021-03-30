@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.list {
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.container {
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 480px) {
+  .container {
+    width: 320px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 0 75px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 1024px;
+    padding: 0 71px;
+  }
+}
+
+.section {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+.modal-btn {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  min-width: 130px;
+  height: 44px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 14px 36px 12px 36px;
+  cursor: pointer;
+}
+
+.modal-btn:hover, .modal-btn:focus {
+  -webkit-box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+          box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+}
+
+@media screen and (min-width: 768px) {
+  .modal-btn {
+    width: 136px;
+    padding: 14px 38px 12px 38px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.166;
+    color: #ffffff;
+  }
+}
+
+.accent:hover,
+.accent:focus {
+  color: #ff6b08;
+}
+
+footer {
+  background-color: #f7f7f7;
+}
+
+footer-page {
+  padding-top: 26px;
+  padding-bottom: 30px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.142;
+  text-align: center;
+}
+/*# sourceMappingURL=main.css.map */
