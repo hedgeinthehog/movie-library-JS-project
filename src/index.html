@@ -8,26 +8,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <<<<<<< Updated upstream <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
 
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 100) {
-                    $('.scrollup').fadeIn();
-                } else {
-                    $('.scrollup').fadeOut();
-                }
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('.scrollup').fadeIn();
+                    } else {
+                        $('.scrollup').fadeOut();
+                    }
+                });
+
+                $('.scrollup').click(function () {
+                    $("html, body").animate({ scrollTop: 0 }, 600);
+                    return false;
+                });
+
             });
-
-            $('.scrollup').click(function () {
-                $("html, body").animate({ scrollTop: 0 }, 600);
-                return false;
-            });
-
-        });
-    </script>
-    <title>Filmoteka</title>
+        </script>
+        =======
+        >>>>>>> Stashed changes
+        <title>Filmoteka</title>
 </head>
 
 <body>
