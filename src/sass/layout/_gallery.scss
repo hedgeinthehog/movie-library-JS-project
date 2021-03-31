@@ -1,10 +1,26 @@
 .list-item {
-  margin: 0 0 20px;
+  height: 440px;
+  margin: 20px;
+  @media screen and (min-width: 768px){
+      margin: 15px; 
+      width: calc((100% - 4 * 15px) / 2);
+  }
+  @media screen and (min-width: 1024px){
+      width: calc((100% - 6 * 15px) / 3);
+  }
 }
 
-.gallery-list {
+.movies-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 20px 0 40px;
-  margin: 0;
+  margin: -20px;
+  @media screen and (min-width: 768px) {
+    margin: -15px;
+    padding: 60px 0 50px;
+    justify-content: flex-start;
+  }
 }
 
 .poster-img {
@@ -12,13 +28,22 @@
   height: 402px;
   border-radius: 5px;
   margin: 0 0 10px;
+  display: block;
+
+  @media screen and (min-width: 768px) {
+    width: 294px;
+    height: 398px; 
+  }    
+  @media screen and (min-width: 1024px) {
+    width: 274px;
+  }
 }
 
 .movie-card-short-info {
   height: 32px;
 }
 
-.movie-card-title{
+.movie-card-title {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
