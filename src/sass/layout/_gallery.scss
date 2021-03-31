@@ -1,6 +1,6 @@
 .list-item {
   height: 440px;
-  margin: 20px;
+  margin: 10px;
   @media screen and (min-width: 768px){
       margin: 15px; 
       width: calc((100% - 4 * 15px) / 2);
@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 20px 0 40px;
-  margin: -20px;
+  margin: -10px;
   @media screen and (min-width: 768px) {
     margin: -15px;
     padding: 60px 0 50px;
