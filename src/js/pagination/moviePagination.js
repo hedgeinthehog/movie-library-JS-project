@@ -1,5 +1,6 @@
 import api from '../api/apiFetching';
 import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
+import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 
 class MoviePagination {
@@ -9,9 +10,11 @@ class MoviePagination {
     this.#movies = [];
     this.currentPage = 1;
     this.totalPages = 0;
+    this.pageNumsRef = document.querySelector('.page-numbers');
     this.totalGenres = [];
     this.goToPrevPage = this.goToPrevPage.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
+    this.goToPage = this.goToPage.bind(this);
   }
 
   get movies() {
@@ -30,6 +33,8 @@ class MoviePagination {
   init() {
     this.getAllGenres();
     this.loadFirstPage();
+    // console.log(this.totalPages);
+    // this.setPageNumbers();
   }
 
   // shows the first page of trending movies
@@ -45,6 +50,8 @@ class MoviePagination {
     return api.fetchPopularFilms(this.currentPage).then(data => {
       const { results, total_pages } = data;
       this.totalPages = total_pages;
+      console.log(this.totalPages);
+
       this.#movies = results;
       return results;
     });
@@ -53,6 +60,10 @@ class MoviePagination {
   // renders markup
   render() {
     this.element.innerHTML = moviesListTemplate(this.movies);
+
+    console.log(this.totalPages);
+    this.pageNumsRef.innerHTML = pageNumetationTemplate(this.setPageNumbers());
+    // this.setPageNumbers();
   }
 
   // prepares info for movie cards
@@ -139,6 +150,39 @@ class MoviePagination {
       this.prepareMovies();
       this.render();
     });
+  }
+
+  goToPage(page) {
+    // if (this.currentPage === this.totalPages) {
+    //   return;
+    // }
+    if (this.currentPage === page) return;
+    this.currentPage = page;
+    this.fetchMovies().then(results => {
+      this.#movies = results;
+      this.prepareMovies();
+      this.render();
+    });
+  }
+
+  setPageNumbers() {
+    // this.pageNumsRef.querySelector('.first-page').append(this.createPageButton(1));
+    const firstPage = 1;
+    const lastPage = this.totalPages;
+
+    // if (this.totalPages)
+
+    // this.pageNumsRef.append(this.createPageButton(this.totalPages));
+
+    return { firstPage, lastPage };
+  }
+
+  createPageButton(pageNum) {
+    let pageBtn = document.createElement('button');
+    pageBtn.innerText = pageNum;
+    console.log(pageBtn);
+
+    return pageBtn;
   }
 }
 
