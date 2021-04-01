@@ -1,16 +1,22 @@
 import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs'
-import debounce from 'lodash.debounce';
 
 const {prevRef, nextRef, searchInpRef} = refs;
 
 const movie = new MoviePagination('.movies-list', '#search-input');
 movie.init();
 
-searchInpRef.addEventListener('input', debounce(requestMovie, 1000));
+searchInpRef.addEventListener('keydown', onPressEnterSearch);
 
 prevRef.addEventListener('click', movie.goToPrevPage);
 nextRef.addEventListener('click', movie.goToNextPage);
+
+function onPressEnterSearch(event){         //do search on Enter press
+    if(event.code === 'Enter'){
+        event.preventDefault();
+        requestMovie();
+    }
+}
 
 function requestMovie(){            //searching logic movies by query or popular
     if(!searchInpRef.value) {
