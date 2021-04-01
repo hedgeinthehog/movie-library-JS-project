@@ -37,7 +37,9 @@
 
 @media screen and (max-width: 767px) {
   .pre-separator,
-  .post-separator {
+  .post-separator,
+  .first-page,
+  .last-page {
     position: absolute;
     width: 1px;
     height: 1px;
