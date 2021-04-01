@@ -1,23 +1,46 @@
 import api from '../api/apiFetching';
 import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
+import switchErrorHide from '../movieHelpers/switchError';
 
 class MoviePagination {
   #movies = [];
+  searchKey ='';
+  byQueryFlag = false
   constructor(selector) {
     this.element = document.querySelector(selector);
     this.#movies = [];
+    this.searchKey = '';
+    this.byQueryFlag = false;
     this.currentPage = 1;
     this.totalPages = 0;
     this.totalGenres = [];
     this.goToPrevPage = this.goToPrevPage.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
+    this.init = this.init.bind(this);
+    this.bind = this.pageReset(this);
+  }
+
+  get byQueryFlag (){
+    return this.byQueryFlag ;
+  }
+  set byQueryFlag (byQueryFlag) {
+    this.byQueryFlag  = byQueryFlag ;
+  }
+
+  get searchKey(){
+    return this.searchKey;
+  }
+  set searchKey(searchKey) {
+    if (!searchKey) {
+      console.error('No query for search!');
+    }
+    this.searchKey = searchKey;
   }
 
   get movies() {
     return this.#movies;
   }
-
   set movies(movieList) {
     if (!movieList) {
       console.error('list non exist');
@@ -29,21 +52,43 @@ class MoviePagination {
   // run this first in outer code - gets list of genres from the server and shows the first page of trending movies
   init() {
     this.getAllGenres();
-    this.loadFirstPage();
+    this.loadPage();
   }
 
-  // shows the first page of trending movies
-  loadFirstPage() {
+  // shows the page of movies 
+  loadPage() {
     return this.fetchMovies().then(data => {
       this.prepareMovies();
       this.render();
     });
   }
 
-  // fetches current page of trending movies
+  //fetch trending or searching movies by byQueryFlag value
   fetchMovies() {
+    if(!this.byQueryFlag){
+      return this.fetchMoviesPopular();
+    }
+    if(this.byQueryFlag){
+      return this.fetchMoviesByQuery();
+    }
+  }
+
+   // fetches current page of searching movies
+  fetchMoviesByQuery() {
+    return api.fetchFilmByQuery(this.currentPage, this.searchKey).then(data => {
+      const { results, total_pages } = data;   
+      switchErrorHide(results);
+      this.totalPages = total_pages;
+      this.#movies = results;
+      return results;
+    });
+  }
+
+  // fetches current page of trending movies
+  fetchMoviesPopular() {
     return api.fetchPopularFilms(this.currentPage).then(data => {
       const { results, total_pages } = data;
+      switchErrorHide(results);
       this.totalPages = total_pages;
       this.#movies = results;
       return results;
@@ -53,6 +98,18 @@ class MoviePagination {
   // renders markup
   render() {
     this.element.innerHTML = moviesListTemplate(this.movies);
+  }
+
+  // clears markup
+  clear(){
+    this.element.innerHTML = '';
+  }
+
+  //resets page
+  pageReset() {
+    this.currentPage = 1;
+    this.#movies = [];
+    this.clear();
   }
 
   // prepares info for movie cards

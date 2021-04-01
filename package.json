@@ -48,6 +48,7 @@
     "chokidar-cli": "^2.1.0",
     "core-js": "^3.9.1",
     "handlebars": "^4.7.7",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "lodash.debounce": "^4.0.8"
   }
 }
