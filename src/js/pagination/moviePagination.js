@@ -33,8 +33,6 @@ class MoviePagination {
   init() {
     this.getAllGenres();
     this.loadFirstPage();
-    // console.log(this.totalPages);
-    // this.setPageNumbers();
   }
 
   // shows the first page of trending movies
@@ -50,8 +48,6 @@ class MoviePagination {
     return api.fetchPopularFilms(this.currentPage).then(data => {
       const { results, total_pages } = data;
       this.totalPages = total_pages;
-      console.log(this.totalPages);
-
       this.#movies = results;
       return results;
     });
@@ -60,10 +56,7 @@ class MoviePagination {
   // renders markup
   render() {
     this.element.innerHTML = moviesListTemplate(this.movies);
-
-    console.log(this.totalPages);
-    this.pageNumsRef.innerHTML = pageNumetationTemplate(this.setPageNumbers());
-    // this.setPageNumbers();
+    this.setPageNumbers();
   }
 
   // prepares info for movie cards
@@ -152,36 +145,86 @@ class MoviePagination {
     });
   }
 
-  goToPage(page) {
-    // if (this.currentPage === this.totalPages) {
-    //   return;
-    // }
-    if (this.currentPage === page) return;
-    this.currentPage = page;
-    this.fetchMovies().then(results => {
-      this.#movies = results;
-      this.prepareMovies();
-      this.render();
-    });
+  // shows page selected by page number
+  goToPage(event) {
+    const clickedElem = event.target;
+    if (clickedElem.matches('button')) {
+      const page = Number(clickedElem.innerHTML);
+
+      if (this.currentPage === page) return;
+      this.currentPage = page;
+      this.fetchMovies().then(results => {
+        this.#movies = results;
+        this.prepareMovies();
+        this.render();
+      });
+    }
   }
 
+  // renders current page numbers' selection (1 ... 4 5 6 7 8 ... 89)
   setPageNumbers() {
-    // this.pageNumsRef.querySelector('.first-page').append(this.createPageButton(1));
+    this.pageNumsRef.innerHTML = '';
+
     const firstPage = 1;
     const lastPage = this.totalPages;
+    const currentPage = this.currentPage;
+    const pagesTotal = this.totalPages;
 
-    // if (this.totalPages)
+    if (this.totalPages <= 7) {
+      for (let i = 1; i < this.totalPages + 1; i++) {
+        this.pageNumsRef.append(this.createPageButton(i));
+      }
+      return;
+    }
 
-    // this.pageNumsRef.append(this.createPageButton(this.totalPages));
+    this.pageNumsRef.innerHTML = pageNumetationTemplate({
+      firstPage,
+      lastPage,
+    });
 
-    return { firstPage, lastPage };
+    if (currentPage === firstPage) {
+      this.pageNumsRef
+        .querySelector('.first-page')
+        .classList.add('active-page');
+    }
+
+    if (currentPage === pagesTotal) {
+      this.pageNumsRef.querySelector('.last-page').classList.add('active-page');
+    }
+
+    this.middlePageNumsRef = document.querySelector('.middle-page-numbers');
+
+    if (currentPage < 4) {
+      this.pageNumsRef.querySelector('.pre-separator').classList.add('hidden');
+      for (let page = 2; page < 7; page++) {
+        this.middlePageNumsRef.append(this.createPageButton(page));
+      }
+    }
+
+    if (currentPage > pagesTotal - 3) {
+      this.pageNumsRef.querySelector('.post-separator').classList.add('hidden');
+      for (let page = pagesTotal - 5; page < pagesTotal; page++) {
+        this.middlePageNumsRef.append(this.createPageButton(page));
+      }
+    }
+
+    if (this.currentPage >= 4 && this.currentPage <= this.totalPages - 3) {
+      for (
+        let page = this.currentPage - 2;
+        page < this.currentPage + 3;
+        page++
+      ) {
+        this.middlePageNumsRef.append(this.createPageButton(page));
+      }
+    }
   }
 
+  // creates a page number's button and sets active page number
   createPageButton(pageNum) {
     let pageBtn = document.createElement('button');
+    pageBtn.classList.add('pagination-controls');
+    if (this.currentPage === pageNum) pageBtn.classList.add('active-page');
     pageBtn.innerText = pageNum;
-    console.log(pageBtn);
-
     return pageBtn;
   }
 }

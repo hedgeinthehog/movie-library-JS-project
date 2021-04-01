@@ -1,0 +1,50 @@
+#pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-numbers {
+  display: flex;
+}
+
+.pagination-controls {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+  background-color: transparent;
+  min-width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  padding: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.pagination-arrows {
+  stroke: $dark;
+}
+
+.pagination-controls.active-page {
+  background-color: $accent-color;
+  color: $white;
+}
+
+.pagination-controls.hidden {
+  @extend %visuallyHidden;
+}
+
+@media screen and (max-width: 767px) {
+  .pre-separator,
+  .post-separator {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+}
