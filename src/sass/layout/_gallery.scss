@@ -10,15 +10,20 @@
   }
 }
 
-.movies-list{
+.movie-gallery {
+  padding: 20px 0 40px;
+  @media screen and (min-width: 768px) {
+    padding: 60px 0 50px;
+  }
+}
+.movies-list {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 20px 0 40px;
   margin: -10px;
   @media screen and (min-width: 768px) {
     margin: -15px;
-    padding: 60px 0 50px;
     justify-content: flex-start;
   }
 }

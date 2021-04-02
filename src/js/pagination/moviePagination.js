@@ -2,6 +2,7 @@ import api from '../api/apiFetching';
 import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
+import workLoader from '../spinner/loader';
 
 class MoviePagination {
   #movies = [];
@@ -98,11 +99,13 @@ class MoviePagination {
   // renders markup
   render() {
     this.element.innerHTML = moviesListTemplate(this.movies);
+    workLoader();
   }
 
   // clears markup
   clear(){
     this.element.innerHTML = '';
+    workLoader();
   }
 
   //resets page
