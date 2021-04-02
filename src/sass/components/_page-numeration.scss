@@ -1,13 +1,18 @@
 #pagination {
   display: flex;
   justify-content: center;
+  margin-top: 40px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 50px;
+  }
 }
 
 .page-numbers {
   display: flex;
 }
 
-.pagination-controls {
+.pagination-elem {
   font-family: inherit;
   font-weight: 500;
   font-size: 12px;
@@ -18,24 +23,38 @@
   border: none;
   border-radius: 5px;
   padding: 11px;
+
+  &.hidden {
+    @extend %visuallyHidden;
+  }
+}
+
+.pagination-controls {
   cursor: pointer;
   transition: all 0.2s ease-out;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: (0px 0px 8px -2px rgba(66, 66, 66, 0.6));
+  }
+
+  &.prev,
+  &.next {
+    background-color: $dark-bg;
+  }
+
+  &.active-page {
+    background-color: $accent-color;
+    color: $white;
+  }
 }
 
 .pagination-arrows {
   stroke: $dark;
 }
 
-.pagination-controls.active-page {
-  background-color: $accent-color;
-  color: $white;
-}
-
-.pagination-controls.hidden {
-  @extend %visuallyHidden;
-}
-
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .pre-separator,
   .post-separator,
   .first-page,

@@ -257,21 +257,21 @@ class MoviePagination {
 
     this.middlePageNumsRef = document.querySelector('.middle-page-numbers');
 
-    if (currentPage < 4) {
+    if (currentPage <= 4) {
       this.pageNumsRef.querySelector('.pre-separator').classList.add('hidden');
       for (let page = 2; page < 7; page++) {
         this.middlePageNumsRef.append(this.createPageButton(page));
       }
     }
 
-    if (currentPage > pagesTotal - 3) {
+    if (currentPage > pagesTotal - 4) {
       this.pageNumsRef.querySelector('.post-separator').classList.add('hidden');
       for (let page = pagesTotal - 5; page < pagesTotal; page++) {
         this.middlePageNumsRef.append(this.createPageButton(page));
       }
     }
 
-    if (this.currentPage >= 4 && this.currentPage <= this.totalPages - 3) {
+    if (this.currentPage > 4 && this.currentPage <= this.totalPages - 4) {
       for (
         let page = this.currentPage - 2;
         page < this.currentPage + 3;
@@ -285,7 +285,7 @@ class MoviePagination {
   // creates a page number's button and sets active page number
   createPageButton(pageNum) {
     let pageBtn = document.createElement('button');
-    pageBtn.classList.add('pagination-controls');
+    pageBtn.classList.add('pagination-controls', 'pagination-elem');
     if (this.currentPage === pageNum) pageBtn.classList.add('active-page');
     pageBtn.innerText = pageNum;
     return pageBtn;
