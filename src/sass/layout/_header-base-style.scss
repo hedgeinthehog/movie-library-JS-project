@@ -48,3 +48,9 @@
 .logo-title {
   @extend %visuallyHidden;
 }
+.dark-mode-text {
+  font-family: $main-font;
+  color: $white;
+  text-align-last: right;
+  font-size: 12px;
+}
