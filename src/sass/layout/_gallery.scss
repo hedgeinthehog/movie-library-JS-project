@@ -1,6 +1,16 @@
 .list-item {
   height: 440px;
   margin: 10px;
+  border-radius: 5px;
+  transition: box-shadow, transform 250ms  cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+  }
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+  }
   @media screen and (min-width: 768px){
       margin: 15px; 
       width: calc((100% - 4 * 15px) / 2);
