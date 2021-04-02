@@ -1,6 +1,7 @@
 //utils
 @import './utils/variables';
 @import './utils/placeholders';
+@import './utils/visually-hidden';
 
 //base
 @import './base/common';
@@ -24,3 +25,4 @@
 @import './layout/team-modal';
 @import './layout/footerStyle';
 @import './layout/btn-to-top';
+@import './layout/toggleThemeBtn';

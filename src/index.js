@@ -1,4 +1,7 @@
 import './sass/main.scss';
 import './js/teamLightbox';
 import './js/custom';
-import './js/galleryPopRender';
+import './js/galleryRender';
+import { addBackToTop } from 'vanilla-back-to-top';
+addBackToTop();
+import './js/toggleThemeBtn';
