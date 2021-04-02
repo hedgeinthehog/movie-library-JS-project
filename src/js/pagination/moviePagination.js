@@ -3,6 +3,7 @@ import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
 import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
+import workLoader from '../spinner/loader';
 
 class MoviePagination {
   #movies = [];
@@ -46,6 +47,7 @@ class MoviePagination {
   get movies() {
     return this.#movies;
   }
+
   set movies(movieList) {
     if (!movieList) {
       console.error('list non exist');
@@ -104,11 +106,13 @@ class MoviePagination {
   render() {
     this.element.innerHTML = moviesListTemplate(this.movies);
     this.setPageNumbers();
+    workLoader();
   }
 
   // clears markup
   clear() {
     this.element.innerHTML = '';
+    workLoader();
   }
 
   //resets page
