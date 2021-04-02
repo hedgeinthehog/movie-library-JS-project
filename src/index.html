@@ -25,38 +25,54 @@
               <svg class="logo-icon" width="24" height="24">
                 <use href="./images/icons/sprite.svg#logo"></use>
               </svg>
-              <span class="logo-title link">Filmoteka</span>
-            </a>
-            <ul class="header-list list">
-              <li class="header-list-item">
-                <a class="header-list-link link current" href="./index.html"
-                  >Home</a
-                >
-              </li>
-              <li class="header-list-item">
-                <a class="header-list-link link" href="./library.html"
-                  >my library</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <form class="search-form">
-            <input
-              class="search-input js-search-input"
-              type="text"
-              id="search-input"
-              name="query"
-              placeholder="Search"
-            />
-            <label class="search-form-label" for="search-input">Search</label>
-            <svg class="search-icon" width="12px" height="12px">
-              <use href="./images/icons/sprite.svg#search"></use>
-            </svg>
-          </form>
-          <p class="error visually-hidden" id="error">
-            Search result not successful. Enter the correct movie name and
-          </p>
+            <span class="logo-title link">Filmoteka</span>
+          </a>
+          <ul class="header-list list">
+            <li class="header-list-item">
+              <a class="header-list-link link current" href="./index.html">Home</a>
+            </li>
+            <li class="header-list-item">
+              <a class="header-list-link link" href="./library.html">my library</a>
+            </li>
+          </ul>
+        </nav>
+        <form class="search-form">
+          <input class="search-input js-search-input" type="text" id="search-input" name="query"
+            placeholder="Search film" />
+          <label class="search-form-label" for="search-input">Search film
+          </label>
+          <svg class="search-icon" width="12px" height="12px">
+            <use href="./images/icons/sprite.svg#search"></use>
+          </svg>
+        </form>
+        <p class="error visually-hidden" id="error">
+          Search result not successful. Enter the correct movie name and
+        </p>
+        <p class="dark-mode-text">Dark Mode</p>
+        <div class="switch-wrapper">
+          <div class="power-switch">
+            <input type="checkbox" class="switch" id="team-switch-toggle" />
+            <div class="button">
+              <svg class="power-off">
+                <use xlink:href="#line" class="line" />
+                <use xlink:href="#circle" class="circle" />
+              </svg>
+              <svg class="power-on" width='50'>
+                <use xlink:href="#line" class="line" />
+                <use xlink:href="#circle" class="circle" />
+              </svg>
+            </div>
+          </div>
         </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+            <line x1="65" y1="40" x2="65" y2="70" />
+          </symbol>
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+            <circle cx="75" cy="80" r="35" />
+          </symbol>
+        </svg>
       </div>
     </header>
     <section class="movie-gallery">

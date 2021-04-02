@@ -1,4 +1,6 @@
 export default {
+  body: document.querySelector('body'),
+  toggle: document.querySelector('#team-switch-toggle'),
   prevRef: document.querySelector('.prev'),
   nextRef: document.querySelector('.next'),
   errorInpRef: document.querySelector('#error'),
@@ -7,4 +9,3 @@ export default {
   moviesListRef: document.querySelector('.movies-list'),
   pageNumsRef: document.querySelector('.page-numbers'),
 };
-
