@@ -128,6 +128,8 @@ class MoviePagination {
       this.findMovieGenres(movie);
       this.getReleaseYear(movie);
       this.getPosterImg(movie);
+      this.validateAvgVote(movie);
+      this.validateMovieDescription(movie);
     });
   }
 
@@ -141,6 +143,11 @@ class MoviePagination {
 
   // translates array of genres of a movie to a string, limits count of genres to 3
   findMovieGenres(movie) {
+    if (movie.genre_ids.length === 0) {
+      movie.genre_ids = 'Genres unknown';
+      return;
+    }
+
     const maxGenresViewed = 3;
     if (movie.genre_ids.length > maxGenresViewed) {
       movie.genre_ids = movie.genre_ids.slice(0, 3);
@@ -172,9 +179,24 @@ class MoviePagination {
 
   // coverts release date to a year (2017-03-21 -> 2017)
   getReleaseYear(movie) {
+    if (!movie.release_date) {
+      movie.release_date = 'unknown';
+      return;
+    }
+
     const date = new Date(movie.release_date);
     const year = date.getFullYear();
     movie.release_date = year;
+  }
+
+  // if no average vote available, sets it to '-'
+  validateAvgVote(movie) {
+    movie.vote_average = movie.vote_average || '-';
+  }
+
+  // if no description available available, sets it to 'No description available'
+  validateMovieDescription(movie) {
+    movie.overview = movie.overview || 'No description available';
   }
 
   // generates path of a movie's poster image
