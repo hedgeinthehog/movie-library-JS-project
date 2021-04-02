@@ -1,11 +1,10 @@
-#back-to-top {
+#toggleThemeBtn {
   position: fixed;
-  bottom: 15px;
+  top: 15px;
   right: 15px;
   width: 60px;
   height: 60px;
   border: none;
-  opacity: 0.5;
   background: $accent-color;
   box-shadow: 0 0 0 0 $accent-color;
   border-radius: 50%;
@@ -19,7 +18,7 @@
   transform: scale(1);
   transition: 0.5s;
 }
-#back-to-top:hover {
+#toggleThemeBtn:hover {
   -webkit-animation: none;
   -moz-animation: none;
   -ms-animation: none;
