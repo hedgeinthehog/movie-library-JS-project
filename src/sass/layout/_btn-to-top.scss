@@ -1,4 +1,4 @@
-.pulse-button {
+#back-to-top {
   position: fixed;
   bottom: 15px;
   right: 15px;
@@ -6,6 +6,7 @@
   height: 60px;
   border: none;
   opacity: 0.5;
+  background: $accent-color;
   box-shadow: 0 0 0 0 $accent-color;
   border-radius: 50%;
   background-size: cover;
@@ -18,7 +19,7 @@
   transform: scale(1);
   transition: 0.5s;
 }
-.pulse-button:hover {
+#back-to-top:hover {
   -webkit-animation: none;
   -moz-animation: none;
   -ms-animation: none;
