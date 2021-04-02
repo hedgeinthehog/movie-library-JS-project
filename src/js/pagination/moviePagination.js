@@ -5,8 +5,8 @@ import switchErrorHide from '../movieHelpers/switchError';
 
 class MoviePagination {
   #movies = [];
-  searchKey ='';
-  byQueryFlag = false
+  searchKey = '';
+  byQueryFlag = false;
   constructor(selector) {
     this.element = document.querySelector(selector);
     this.#movies = [];
@@ -21,14 +21,14 @@ class MoviePagination {
     this.bind = this.pageReset(this);
   }
 
-  get byQueryFlag (){
-    return this.byQueryFlag ;
+  get byQueryFlag() {
+    return this.byQueryFlag;
   }
-  set byQueryFlag (byQueryFlag) {
-    this.byQueryFlag  = byQueryFlag ;
+  set byQueryFlag(byQueryFlag) {
+    this.byQueryFlag = byQueryFlag;
   }
 
-  get searchKey(){
+  get searchKey() {
     return this.searchKey;
   }
   set searchKey(searchKey) {
@@ -55,7 +55,7 @@ class MoviePagination {
     this.loadPage();
   }
 
-  // shows the page of movies 
+  // shows the page of movies
   loadPage() {
     return this.fetchMovies().then(data => {
       this.prepareMovies();
@@ -65,18 +65,18 @@ class MoviePagination {
 
   //fetch trending or searching movies by byQueryFlag value
   fetchMovies() {
-    if(!this.byQueryFlag){
+    if (!this.byQueryFlag) {
       return this.fetchMoviesPopular();
     }
-    if(this.byQueryFlag){
+    if (this.byQueryFlag) {
       return this.fetchMoviesByQuery();
     }
   }
 
-   // fetches current page of searching movies
+  // fetches current page of searching movies
   fetchMoviesByQuery() {
     return api.fetchFilmByQuery(this.currentPage, this.searchKey).then(data => {
-      const { results, total_pages } = data;   
+      const { results, total_pages } = data;
       switchErrorHide(results);
       this.totalPages = total_pages;
       this.#movies = results;
@@ -101,7 +101,7 @@ class MoviePagination {
   }
 
   // clears markup
-  clear(){
+  clear() {
     this.element.innerHTML = '';
   }
 
