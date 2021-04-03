@@ -91,7 +91,7 @@ class MoviePagination {
 
   //fetch trending or searching movies by byQueryFlag value
   fetchMovies() {
-    if(this.forLibraryFlag){
+    if (this.forLibraryFlag) {
       return this.fetchMoviesFromLibrary();
     }
     if (!this.byQueryFlag && !this.forLibraryFlag) {
@@ -126,16 +126,15 @@ class MoviePagination {
 
   // fetches movies from library depending on movieType
   fetchMoviesFromLibrary() {
-      // const movieId = getFromStorage(this.movieType);  //uncomment line to use localStorage arrays of ids
-      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array  //comment or delete line to use localStorage arrays of ids
-      let promisesArray = [];
-      moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)) );
-      return Promise.all(promisesArray).then(data => {
-        this.movies = data;
-        return this.movies;
-      }); 
-    }
-  
+    // const movieId = getFromStorage(this.movieType);  //uncomment line to use localStorage arrays of ids
+    const moviesId = [550, 551, 552, 553, 554, 704338]; //testing ids array  //comment or delete line to use localStorage arrays of ids
+    let promisesArray = [];
+    moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)));
+    return Promise.all(promisesArray).then(data => {
+      this.movies = data;
+      return data;
+    });
+  }
 
   // renders markup
   render() {
@@ -160,7 +159,7 @@ class MoviePagination {
   // prepares info for movie cards
   prepareMovies() {
     this.movies.forEach(movie => {
-      this.findMovieGenres(movie);
+      this.getMovieGenres(movie);
       this.getReleaseYear(movie);
       this.getPosterImg(movie);
       this.validateAvgVote(movie);
@@ -176,33 +175,52 @@ class MoviePagination {
     });
   }
 
-  // translates array of genres of a movie to a string, limits count of genres to 3
-  findMovieGenres(movie) {
-    if (movie.genre_ids.length === 0) {
-      movie.genre_ids = 'Genres unknown';
+  // converts genres to array of genre names
+  adaptMovieGenres(movie) {
+    if (movie.hasOwnProperty('genres')) {
+      for (let i = 0; i < movie.genres.length; i++) {
+        movie.genres[i] = movie.genres[i].id;
+      }
+      return movie.genres;
+    }
+    if (movie.hasOwnProperty('genre_ids')) {
+      return movie.genre_ids;
+    }
+  }
+
+  getMovieGenres(movie) {
+    // checks if a movie has genres
+    if (
+      (movie.hasOwnProperty('genre_ids') && movie.genre_ids.length === 0) ||
+      (movie.hasOwnProperty('genres') && movie.genres.length === 0)
+    ) {
+      movie.genres = 'Genres unknown';
       return;
     }
 
+    // if the movie has genres, translates an array of genres to a string, limits count of genres to 3
     const maxGenresViewed = 3;
-    if (movie.genre_ids.length > maxGenresViewed) {
-      movie.genre_ids = movie.genre_ids.slice(0, 3);
+    movie.genres = this.adaptMovieGenres(movie);
+
+    if (movie.genres.length > maxGenresViewed) {
+      movie.genres = movie.genres.slice(0, 3);
       this.convertGenreIds(movie);
-      movie.genre_ids.splice(maxGenresViewed - 1, 1, 'Other');
-      movie.genre_ids = this.convertMovieGenresToString(movie.genre_ids);
+      movie.genres.splice(maxGenresViewed - 1, 1, 'Other');
+      movie.genres = this.convertMovieGenresToString(movie.genres);
       return;
     }
-    movie.genre_ids = movie.genre_ids.slice(0, 3);
+    movie.genres = movie.genres.slice(0, 3);
     this.convertGenreIds(movie);
-    movie.genre_ids = this.convertMovieGenresToString(movie.genre_ids);
+    movie.genres = this.convertMovieGenresToString(movie.genres);
   }
 
   // converts movie's genres from ids to names ([28, 12] -> [Action, Adventure])
   convertGenreIds(movie) {
-    for (let i = 0; i < movie.genre_ids.length; i++) {
+    for (let i = 0; i < movie.genres.length; i++) {
       const genre = this.totalGenres.find(
-        genreItem => genreItem.id === movie.genre_ids[i],
+        genreItem => genreItem.id === movie.genres[i],
       );
-      movie.genre_ids[i] = genre.name;
+      movie.genres[i] = genre.name;
     }
   }
 
@@ -236,7 +254,10 @@ class MoviePagination {
 
   // generates path of a movie's poster image
   getPosterImg(movie) {
-    movie.backdrop_path = generatePosterPath(movie.backdrop_path,movie.poster_path);
+    movie.backdrop_path = generatePosterPath(
+      movie.backdrop_path,
+      movie.poster_path,
+    );
   }
 
   goToPrevPage() {
@@ -349,19 +370,19 @@ class MoviePagination {
   }
 
   //function that set helpers data for fetching movies from library by ids array from watched list
-  libraryWatchedHelpersData(){
+  libraryWatchedHelpersData() {
     this.movieType = 'watched';
     this.forLibraryFlag = true;
   }
 
   //function that set helpers data for fetching movies from library by ids array from queue list
-  libraryQueueHelpersData(){
+  libraryQueueHelpersData() {
     this.movieType = 'queue';
     this.forLibraryFlag = true;
   }
 
   //function for clearing helpers data for fetching movies from library by id
-  resetLibraryHelpersData(){
+  resetLibraryHelpersData() {
     this.movieType = '';
     this.forLibraryFlag = false;
   }
