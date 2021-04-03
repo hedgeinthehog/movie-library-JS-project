@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css"
-      rel="stylesheet"
-    />
-    <title>Filmoteka</title>
-  </head>
 
-  <body>
-    <header>
-      <div class="header">
-        <div class="container">
-          <nav class="header-nav">
-            <a class="header-logo logo" href="./index.html">
-              <svg class="logo-icon" width="24" height="24">
-                <use href="./images/icons/sprite.svg#logo"></use>
-              </svg>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css" rel="stylesheet" />
+  <title>Filmoteka</title>
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <div class="container">
+        <nav class="header-nav">
+          <a class="header-logo logo" href="./index.html">
+            <svg class="logo-icon" width="24" height="24">
+              <use href="./images/icons/sprite.svg#logo"></use>
+            </svg>
             <span class="logo-title link">Filmoteka</span>
           </a>
           <ul class="header-list list">
@@ -74,138 +69,43 @@
           </symbol>
         </svg>
       </div>
-    </header>
-    <section class="movie-gallery">
-      <div class="container">
-        <ul class="movies-list"></ul>
-        <div class="loader visually-hidden">Loading</div>
-        <div id="pagination">
-          <button type="button" class="pagination-elem pagination-controls prev">
-            <svg class="pagination-arrows" width="16" height="16">
-              <use href="./images/icons/sprite.svg#arrow-left"></use>
+  </header>
+  <section class="movie-gallery">
+    <div class="container">
+      <ul class="movies-list"></ul>
+      <div class="loader visually-hidden">Loading</div>
+      <div id="pagination">
+        <button type="button" class="pagination-elem pagination-controls prev">
+          <svg class="pagination-arrows" width="16" height="16">
+            <use href="./images/icons/sprite.svg#arrow-left"></use>
+          </svg>
+        </button>
+        <div class="page-numbers"></div>
+        <button type="button" class="pagination-elem pagination-controls next">
+          <svg class="pagination-arrows" width="16" height="16">
+            <use href="./images/icons/sprite.svg#arrow-right"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="footer-page">
+        <p class="copyright">&copy; 2020 | All Rights Reserved |</p>
+        <div class="developers">
+          <p>
+            Developed with
+            <svg class="footer-hart" width="14" height="13">
+              <use href="./images/icons/sprite.svg#heart"></use>
             </svg>
-          </button>
-          <div class="page-numbers"></div>
-          <button type="button" class="pagination-elem pagination-controls next">
-            <svg class="pagination-arrows" width="16" height="16">
-              <use href="./images/icons/sprite.svg#arrow-right"></use>
-            </svg>
-          </button>
+            by <span class="js-team-modal team-modal">GoIT Students</span>
+          </p>
         </div>
       </div>
-    </section>
-    <footer>
-      <div class="container">
-        <div class="footer-page">
-          <p class="copyright">&copy; 2020 | All Rights Reserved |</p>
-          <div class="developers">
-            <p>
-              Developed with
-              <svg class="footer-hart" width="14" height="13">
-                <use href="./images/icons/sprite.svg#heart"></use>
-              </svg>
-              by <span class="js-team-modal team-modal">GoIT Students</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </div>
+  </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-      var scrolltotop = {
-        setting: {
-          startline: 100,
-          scrollto: 0,
-          scrollduration: 1e3,
-          fadeduration: [500, 100],
-        },
-        controlHTML:
-          '<img class="pulse-button" src="https://i1155.photobucket.com/albums/p559/scrolltotop/arrow52.png" />',
-        controlattrs: { offsetx: 5, offsety: 5 },
-        anchorkeyword: '#top',
-        state: { isvisible: !1, shouldvisible: !1 },
-        scrollup: function () {
-          this.cssfixedsupport || this.$control.css({ opacity: 0 });
-          var t = isNaN(this.setting.scrollto)
-            ? this.setting.scrollto
-            : parseInt(this.setting.scrollto);
-          (t =
-            'string' == typeof t && 1 == jQuery('#' + t).length
-              ? jQuery('#' + t).offset().top
-              : 0),
-            this.$body.animate({ scrollTop: t }, this.setting.scrollduration);
-        },
-        keepfixed: function () {
-          var t = jQuery(window),
-            o =
-              t.scrollLeft() +
-              t.width() -
-              this.$control.width() -
-              this.controlattrs.offsetx,
-            s =
-              t.scrollTop() +
-              t.height() -
-              this.$control.height() -
-              this.controlattrs.offsety;
-          this.$control.css({ left: o + 'px', top: s + 'px' });
-        },
-        togglecontrol: function () {
-          var t = jQuery(window).scrollTop();
-          this.cssfixedsupport || this.keepfixed(),
-            (this.state.shouldvisible = t >= this.setting.startline ? !0 : !1),
-            this.state.shouldvisible && !this.state.isvisible
-              ? (this.$control
-                  .stop()
-                  .animate({ opacity: 1 }, this.setting.fadeduration[0]),
-                (this.state.isvisible = !0))
-              : 0 == this.state.shouldvisible &&
-                this.state.isvisible &&
-                (this.$control
-                  .stop()
-                  .animate({ opacity: 0 }, this.setting.fadeduration[1]),
-                (this.state.isvisible = !1));
-        },
-        init: function () {
-          jQuery(document).ready(function (t) {
-            var o = scrolltotop,
-              s = document.all;
-            (o.cssfixedsupport =
-              !s ||
-              (s &&
-                'CSS1Compat' == document.compatMode &&
-                window.XMLHttpRequest)),
-              (o.$body = t(
-                window.opera
-                  ? 'CSS1Compat' == document.compatMode
-                    ? 'html'
-                    : 'body'
-                  : 'html,body',
-              )),
-              (o.$control = t(
-                '<div id="topcontrol">' + o.controlHTML + '</div>',
-              )
-                .css({ cursor: 'pointer' })
-                .attr({ title: '' })
-                .click(function () {
-                  return o.scrollup(), !1;
-                })
-                .appendTo('body')),
-              document.all &&
-                !window.XMLHttpRequest &&
-                '' != o.$control.text() &&
-                o.$control.css({ width: o.$control.width() }),
-              o.togglecontrol(),
-              t('a[href="' + o.anchorkeyword + '"]').click(function () {
-                return o.scrollup(), !1;
-              }),
-              t(window).bind('scroll resize', function (t) {
-                o.togglecontrol();
-              });
-          });
-        },
-      };
-      scrolltotop.init();
-    </script>
-  </body>
+</body>
+
 </html>
