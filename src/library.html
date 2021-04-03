@@ -1,98 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css"
-      rel="stylesheet"
-    />
-    <title>Filmoteka - My Library</title>
-  </head>
 
-  <body>
-    <header>
-      <div class="header header-library">
-        <div class="container">
-          <nav class="header-nav">
-            <a class="header-logo logo" href="./index.html">
-              <svg class="logo-icon" width="24" height="24">
-                <use href="./images/icons/sprite.svg#logo"></use>
-              </svg>
-              <span class="logo-title link">Filmoteka</span>
-            </a>
-            <ul class="header-list list">
-              <li class="header-list-item">
-                <a class="header-list-link link" href="./index.html">Home</a>
-              </li>
-              <li class="header-list-item">
-                <a class="header-list-link link current" href="./library.html"
-                  >my library</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <div class="button-wrapper">
-            <button class="modal-btn is-active" type="button">Watched</button>
-            <button class="modal-btn" type="button">Queue</button>
-          </div>
-          <p class="dark-mode-text">Dark Mode</p>
-          <div class="switch-wrapper">
-            <div class="power-switch">
-              <input type="checkbox" class="switch" id="team-switch-toggle" />
-              <div class="button">
-                <svg class="power-off">
-                  <use xlink:href="#line" class="line" />
-                  <use xlink:href="#circle" class="circle" />
-                </svg>
-                <svg class="power-on" width="50">
-                  <use xlink:href="#line" class="line" />
-                  <use xlink:href="#circle" class="circle" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
-            <symbol
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 150 150"
-              id="line"
-            >
-              <line x1="65" y1="40" x2="65" y2="70" />
-            </symbol>
-            <symbol
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 150 150"
-              id="circle"
-            >
-              <circle cx="75" cy="80" r="35" />
-            </symbol>
-          </svg>
-        </div>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css" rel="stylesheet" />
+  <title>Filmoteka - My Library</title>
+</head>
 
-    <footer>
+<body>
+  <header>
+    <div class="header header-library">
       <div class="container">
-        <div class="footer-page">
-          <p class="copyright">&copy; 2020 | All Rights Reserved |</p>
-          <div class="developers">
-            <p>
-              Developed with
-              <svg class="footer-hart">
-                <use href="./images/icons/sprite.svg#heart"></use>
-              </svg>
-              by <span class="js-team-modal team-modal">GoIT Students</span>
-            </p>
+        <nav class="header-nav">
+          <a class="header-logo logo" href="./index.html">
+            <svg class="logo-icon" width="24" height="24">
+              <use href="./images/icons/sprite.svg#logo"></use>
+            </svg>
+            <span class="logo-title link">Filmoteka</span>
+          </a>
+          <ul class="header-list list">
+            <li class="header-list-item">
+              <a class="header-list-link link" href="./index.html">Home</a>
+            </li>
+            <li class="header-list-item">
+              <a class="header-list-link link current" href="./library.html">my library</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="button-wrapper">
+          <button class="modal-btn is-active" type="button">Watched</button>
+          <button class="modal-btn" type="button">Queue</button>
+        </div>
+        <div class="switch-box box-3">
+          <div class="toggle-switch">
+            <input type="checkbox" class="theme-switch-toggle">
+            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+              <path class="outer-ring"
+                d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z"
+                fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3" />
+              <path class="is-checked"
+                d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z" />
+              <path class="is-unchecked"
+                d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z" />
+            </svg>
           </div>
         </div>
       </div>
-    </footer>
-  </body>
+    </div>
+  </header>
+
+  <footer>
+    <div class="container">
+      <div class="footer-page">
+        <p class="copyright">&copy; 2020 | All Rights Reserved |</p>
+        <div class="developers">
+          <p>
+            Developed with
+            <svg class="footer-hart">
+              <use href="./images/icons/sprite.svg#heart"></use>
+            </svg>
+            by <span class="js-team-modal team-modal">GoIT Students</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
 </html>

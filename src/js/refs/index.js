@@ -1,6 +1,6 @@
 export default {
   body: document.querySelector('body'),
-  toggle: document.querySelector('#team-switch-toggle'),
+  toggle: document.querySelector('.theme-switch-toggle'),
   prevRef: document.querySelector('.prev'),
   nextRef: document.querySelector('.next'),
   errorInpRef: document.querySelector('#error'),
