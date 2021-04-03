@@ -12,19 +12,19 @@ toggle.addEventListener('change', setToggleParam);
 // Функция для записи параметров в localStorage и добавления класса body
 function setToggleParam() {
   if (toggle.checked) {
-    body.setAttribute('class', DARK);
-    localStorage.setItem('theme', DARK);
-  } else {
     body.setAttribute('class', LIGHT);
     localStorage.setItem('theme', LIGHT);
+  } else {
+    body.setAttribute('class', DARK);
+    localStorage.setItem('theme', DARK);
   }
 }
 
 // проверка localStorage та темную тему
 if (localStorage.theme === DARK) {
-  toggle.checked = true;
+  toggle.checked = false;
   body.setAttribute('class', DARK);
 } else {
-  toggle.checked = false;
+  toggle.checked = true;
   body.setAttribute('class', LIGHT);
 }

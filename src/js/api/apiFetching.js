@@ -34,6 +34,17 @@ const api = {
       })
       .catch(() => console.error('no ganres'));
   },
+  fetchFilmById(movieId = ''){
+    workLoader();
+    const url = `${BASE_URL}/3/movie/${movieId}?api_key=${API_KEY}`;
+    return fetch(url)
+    .then(response => {
+      if(response.ok){
+        return response.json();
+      }
+    })
+    .catch(() => console.error('current film is missing'));
+  },
 };
 
 export default api;
