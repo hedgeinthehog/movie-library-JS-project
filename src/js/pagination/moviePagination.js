@@ -115,18 +115,19 @@ class MoviePagination {
   }
 
   fetchMoviesFromLibrary() {
-      // const moviesId = getFromStorage(forStorageValue);
       const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array
       let promisesArray = [];
       moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)) );
-      const mainPromise = Promise.all(promisesArray).then(data => {return data}); 
-      console.log(mainPromise);
-      return mainPromise;
+      return Promise.all(promisesArray).then(data => {
+        this.movies = data;
+        return this.movies;
+      }); 
     }
   
 
   // renders markup
   render() {
+    console.log(this.movies)
     this.element.innerHTML = moviesListTemplate(this.movies);
     this.setPageNumbers();
     workLoader();
@@ -224,6 +225,7 @@ class MoviePagination {
 
   // generates path of a movie's poster image
   getPosterImg(movie) {
+    confirm.log(movie);
     movie.backdrop_path = generatePosterPath(movie.backdrop_path);
   }
 
