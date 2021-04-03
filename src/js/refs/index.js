@@ -8,4 +8,6 @@ export default {
   loaderRef: document.querySelector('.loader'),
   moviesListRef: document.querySelector('.movies-list'),
   pageNumsRef: document.querySelector('.page-numbers'),
+  watchedBtnRef: document.querySelector('#watched'),
+  queueBtnRef: document.querySelector('#queue'),
 };

@@ -3,7 +3,7 @@ import refs from '../refs';
 
 const { prevRef, nextRef, searchInpRef, pageNumsRef } = refs;
 
-const movie = new MoviePagination('.movies-list', '#search-input');
+const movie = new MoviePagination('.movies-list');
 movie.init();
 
 searchInpRef.addEventListener('keydown', onPressEnterSearch);

@@ -9,11 +9,13 @@ class MoviePagination {
   #movies = [];
   searchKey = '';
   byQueryFlag = false;
+  forLibraryFlag = false;
   constructor(selector) {
     this.element = document.querySelector(selector);
     this.#movies = [];
     this.searchKey = '';
     this.byQueryFlag = false;
+    this.forLibraryFlag = false;
     this.currentPage = 1;
     this.totalPages = 0;
     this.pageNumsRef = document.querySelector('.page-numbers');
@@ -23,6 +25,13 @@ class MoviePagination {
     this.goToPage = this.goToPage.bind(this);
     this.init = this.init.bind(this);
     this.bind = this.pageReset(this);
+  }
+
+  get forLibraryFlag() {
+    return this.forLibraryFlag;
+  }
+  set forLibraryFlag(forLibraryFlag) {
+    this.forLibraryFlag = forLibraryFlag;
   }
 
   get byQueryFlag() {
@@ -72,10 +81,13 @@ class MoviePagination {
 
   //fetch trending or searching movies by byQueryFlag value
   fetchMovies() {
-    if (!this.byQueryFlag) {
+    if(this.forLibraryFlag){
+      return this.fetchMoviesFromLibrary();
+    }
+    if (!this.byQueryFlag && !this.forLibraryFlag) {
       return this.fetchMoviesPopular();
     }
-    if (this.byQueryFlag) {
+    if (this.byQueryFlag && !this.forLibraryFlag) {
       return this.fetchMoviesByQuery();
     }
   }
@@ -101,6 +113,17 @@ class MoviePagination {
       return results;
     });
   }
+
+  fetchMoviesFromLibrary() {
+      // const moviesId = getFromStorage(forStorageValue);
+      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array
+      let promisesArray = [];
+      moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)) );
+      const mainPromise = Promise.all(promisesArray).then(data => {return data}); 
+      console.log(mainPromise);
+      return mainPromise;
+    }
+  
 
   // renders markup
   render() {
