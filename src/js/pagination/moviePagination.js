@@ -127,7 +127,7 @@ class MoviePagination {
   // fetches movies from library depending on movieType
   fetchMoviesFromLibrary() {
       // const movieId = getFromStorage(this.movieType);  //uncomment line to use localStorage arrays of ids
-      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array  //comment line to use localStorage arrays of ids
+      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array  //comment or delete line to use localStorage arrays of ids
       let promisesArray = [];
       moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)) );
       return Promise.all(promisesArray).then(data => {
@@ -139,7 +139,6 @@ class MoviePagination {
 
   // renders markup
   render() {
-    console.log(this.movies)
     this.element.innerHTML = moviesListTemplate(this.movies);
     this.setPageNumbers();
     workLoader();
@@ -179,7 +178,6 @@ class MoviePagination {
 
   // translates array of genres of a movie to a string, limits count of genres to 3
   findMovieGenres(movie) {
-    console.log(movie);
     if (movie.genre_ids.length === 0) {
       movie.genre_ids = 'Genres unknown';
       return;
