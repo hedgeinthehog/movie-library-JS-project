@@ -236,8 +236,7 @@ class MoviePagination {
 
   // generates path of a movie's poster image
   getPosterImg(movie) {
-    console.log(movie);
-    movie.backdrop_path = generatePosterPath(movie.backdrop_path);
+    movie.backdrop_path = generatePosterPath(movie.backdrop_path,movie.poster_path);
   }
 
   goToPrevPage() {
