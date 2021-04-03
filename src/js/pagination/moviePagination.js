@@ -4,17 +4,20 @@ import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
 import workLoader from '../spinner/loader';
+import getFromStorage from '../getFromStorage/getFromStorage';
 
 class MoviePagination {
   #movies = [];
   searchKey = '';
   byQueryFlag = false;
   forLibraryFlag = false;
+  movieType = '';
   constructor(selector) {
     this.element = document.querySelector(selector);
     this.#movies = [];
     this.searchKey = '';
     this.byQueryFlag = false;
+    this.movieType = '';
     this.forLibraryFlag = false;
     this.currentPage = 1;
     this.totalPages = 0;
@@ -25,6 +28,13 @@ class MoviePagination {
     this.goToPage = this.goToPage.bind(this);
     this.init = this.init.bind(this);
     this.bind = this.pageReset(this);
+  }
+
+  get movieType() {
+    return this.movieType;
+  }
+  set movieType(movieType) {
+    this.movieType = movieType;
   }
 
   get forLibraryFlag() {
@@ -114,8 +124,10 @@ class MoviePagination {
     });
   }
 
+  // fetches movies from library depending on movieType
   fetchMoviesFromLibrary() {
-      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array
+      // const movieId = getFromStorage(this.movieType);  //uncomment line to use localStorage arrays of ids
+      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array  //comment line to use localStorage arrays of ids
       let promisesArray = [];
       moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)) );
       return Promise.all(promisesArray).then(data => {
@@ -167,6 +179,7 @@ class MoviePagination {
 
   // translates array of genres of a movie to a string, limits count of genres to 3
   findMovieGenres(movie) {
+    console.log(movie);
     if (movie.genre_ids.length === 0) {
       movie.genre_ids = 'Genres unknown';
       return;
@@ -225,7 +238,7 @@ class MoviePagination {
 
   // generates path of a movie's poster image
   getPosterImg(movie) {
-    confirm.log(movie);
+    console.log(movie);
     movie.backdrop_path = generatePosterPath(movie.backdrop_path);
   }
 
@@ -336,6 +349,24 @@ class MoviePagination {
     if (this.currentPage === pageNum) pageBtn.classList.add('active-page');
     pageBtn.innerText = pageNum;
     return pageBtn;
+  }
+
+  //function that set helpers data for fetching movies from library by ids array from watched list
+  libraryWatchedHelpersData(){
+    this.movieType = 'watched';
+    this.forLibraryFlag = true;
+  }
+
+  //function that set helpers data for fetching movies from library by ids array from queue list
+  libraryQueueHelpersData(){
+    this.movieType = 'queue';
+    this.forLibraryFlag = true;
+  }
+
+  //function for clearing helpers data for fetching movies from library by id
+  resetLibraryHelpersData(){
+    this.movieType = '';
+    this.forLibraryFlag = false;
   }
 }
 

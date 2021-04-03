@@ -3,12 +3,29 @@ import refs from '../refs';
 
 const { watchedBtnRef, queueBtnRef } = refs;
 
+
 const movie = new MoviePagination('.movies-list');
 
-watchedBtnRef.addEventListener('click', showWatchedOnClick);
+movie.libraryWatchedHelpersData();
+movie.init();
+movie.resetLibraryHelpersData();
 
-function showWatchedOnClick(){
-    movie.forLibraryFlag = true;
+watchedBtnRef.addEventListener('click', showWatchedOnClick);
+queueBtnRef.addEventListener('click', showQueueOnClick);
+
+function showQueueOnClick(){
+    //function thats shown films from queue from lockalStorage
+    movie.libraryQueueHelpersData();
     movie.init();
-    movie.forLibraryFlag = false;
+    movie.resetLibraryHelpersData();
+    queueBtnRef.classList.add('is-active');
+    watchedBtnRef.classList.remove('is-active');
+}
+function showWatchedOnClick(){
+    //function thats shown films from wathed from lockalStorage
+    movie.libraryWatchedHelpersData();
+    movie.init();
+    movie.resetLibraryHelpersData();
+    watchedBtnRef.classList.add('is-active');
+    queueBtnRef.classList.remove('is-active');
 }
