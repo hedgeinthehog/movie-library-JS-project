@@ -4,16 +4,21 @@ import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
 import workLoader from '../spinner/loader';
+import getFromStorage from '../getFromStorage/getFromStorage';
 
 class MoviePagination {
   #movies = [];
   searchKey = '';
   byQueryFlag = false;
+  forLibraryFlag = false;
+  movieType = '';
   constructor(selector) {
     this.element = document.querySelector(selector);
     this.#movies = [];
     this.searchKey = '';
     this.byQueryFlag = false;
+    this.movieType = '';
+    this.forLibraryFlag = false;
     this.currentPage = 1;
     this.totalPages = 0;
     this.pageNumsRef = document.querySelector('.page-numbers');
@@ -23,6 +28,20 @@ class MoviePagination {
     this.goToPage = this.goToPage.bind(this);
     this.init = this.init.bind(this);
     this.bind = this.pageReset(this);
+  }
+
+  get movieType() {
+    return this.movieType;
+  }
+  set movieType(movieType) {
+    this.movieType = movieType;
+  }
+
+  get forLibraryFlag() {
+    return this.forLibraryFlag;
+  }
+  set forLibraryFlag(forLibraryFlag) {
+    this.forLibraryFlag = forLibraryFlag;
   }
 
   get byQueryFlag() {
@@ -72,10 +91,13 @@ class MoviePagination {
 
   //fetch trending or searching movies by byQueryFlag value
   fetchMovies() {
-    if (!this.byQueryFlag) {
+    if(this.forLibraryFlag){
+      return this.fetchMoviesFromLibrary();
+    }
+    if (!this.byQueryFlag && !this.forLibraryFlag) {
       return this.fetchMoviesPopular();
     }
-    if (this.byQueryFlag) {
+    if (this.byQueryFlag && !this.forLibraryFlag) {
       return this.fetchMoviesByQuery();
     }
   }
@@ -101,6 +123,19 @@ class MoviePagination {
       return results;
     });
   }
+
+  // fetches movies from library depending on movieType
+  fetchMoviesFromLibrary() {
+      // const movieId = getFromStorage(this.movieType);  //uncomment line to use localStorage arrays of ids
+      const moviesId = [550, 551, 552, 553, 554, 555]; //testing ids array  //comment or delete line to use localStorage arrays of ids
+      let promisesArray = [];
+      moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)) );
+      return Promise.all(promisesArray).then(data => {
+        this.movies = data;
+        return this.movies;
+      }); 
+    }
+  
 
   // renders markup
   render() {
@@ -311,6 +346,24 @@ class MoviePagination {
     if (this.currentPage === pageNum) pageBtn.classList.add('active-page');
     pageBtn.innerText = pageNum;
     return pageBtn;
+  }
+
+  //function that set helpers data for fetching movies from library by ids array from watched list
+  libraryWatchedHelpersData(){
+    this.movieType = 'watched';
+    this.forLibraryFlag = true;
+  }
+
+  //function that set helpers data for fetching movies from library by ids array from queue list
+  libraryQueueHelpersData(){
+    this.movieType = 'queue';
+    this.forLibraryFlag = true;
+  }
+
+  //function for clearing helpers data for fetching movies from library by id
+  resetLibraryHelpersData(){
+    this.movieType = '';
+    this.forLibraryFlag = false;
   }
 }
 
