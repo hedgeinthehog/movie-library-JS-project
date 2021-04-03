@@ -4,7 +4,7 @@ const { moviesListRef, loaderRef } = refs;
 
 function workLoader() {
     if(moviesListRef.innerHTML === '') {
-        loaderRef.classList.remove('visually-hidden');
+       loaderRef.classList.remove('visually-hidden');
         return;
     }
     else {

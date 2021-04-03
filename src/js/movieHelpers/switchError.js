@@ -1,13 +1,15 @@
 import refs from '../refs';
 
-const { errorInpRef } = refs;
+const { errorInpRef, loaderRef } = refs;
 
 function flagChange(flag) {
   if (flag) {
     errorInpRef.classList.add('visually-hidden');
+    loaderRef.classList.add('visually-hidden');
   }
   if (!flag) {
     errorInpRef.classList.remove('visually-hidden');
+    loaderRef.classList.add('visually-hidden');
   }
 }
 function switchErrorHide(arr) {

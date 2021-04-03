@@ -106,13 +106,11 @@ class MoviePagination {
   render() {
     this.element.innerHTML = moviesListTemplate(this.movies);
     this.setPageNumbers();
-    workLoader();
   }
 
   // clears markup
   clear() {
     this.element.innerHTML = '';
-    workLoader();
   }
 
   //resets page
