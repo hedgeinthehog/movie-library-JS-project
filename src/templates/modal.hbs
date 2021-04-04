@@ -1,31 +1,20 @@
-   
-     <div  class = " modal " >
-                
-              <ul class="detalis-film list">
-                  <li class="detalis-film-img">
-                      <img src="{{backdrop_path}}" alt="{{film_title}}" class="card__image"/></li>
-                      
-                  <li class="detalis-film-about">
-                      <h2 class="film-title">{{film_title}}</h2>
-                      <ul class="list">
-                        <li class="statistics"><span class="statistics-title">Vote / Votes </span> <div class="rectangle"><span>{{vote}}</span></div> <div class="rectangle"><span>{{votes}}</span></div> </li>
-                        <li class="statistics"> <span class="statistics-title">Popularity </span> {{popularity}} </p>
-                        <li class="statistics"><span class="statistics-title">Original Title</span>   {{original_title}} </li>
-                        <li class="statistics"><span class="statistics-title">Genre </span>  {{genre}} </li> 
-                      </ul>
-                       <h3 class="about-title">About </h3>
-                       <p class="about">{{about}}</p>
-                      
-                    <ul class = "modal-button list">
-                      <li>
-                          <button  type ="submit" class = "modal-btn"> add to Watched </button>
-                      </li>
-                      <li>
-                          <button  type = "submit" class = "modal-btn"> add to queue </button>
-                      </li>
-                  </ul>
-                  </li>
-              </ul>
-
-          </div>     
-        
+<div class="modal">
+  <div>
+    <img class="modal-img" src="{{backdrop_path}}" alt="{{title}}" class="card__image"/>
+  </div>
+  <div class="modal-movie-details">
+    <h2 class="modal-movie-title">{{title}}</h2>
+    <div class="movie-details-table">
+      <div class="movie-details-item"><p class="movie-details-title">Vote / Votes</p><p class="details-item-info"><span class="modal-vote-avg">{{vote_average}}</span> / <span class="modal-vote-count">{{vote_count}}</span></p></div>
+      <div class="movie-details-item"><p class="movie-details-title">Popularity</p><p class="details-item-info">{{popularity}}</p></div>
+      <div class="movie-details-item"><p class="movie-details-title">Original Title</p><p class="details-item-info details-item-title">{{original_title}}</p></div>
+      <div class="movie-details-item"><p class="movie-details-title">Genre</p><p class="details-item-info">{{genres}}</p></div>
+    </div>
+    <p class="about-movie-title">About</p>
+    <p class="about-movie-info">{{overview}}</p>
+    <div class= "modal-buttons">
+      <button class="add-to-watched-btn modal-btn light-theme-btn" type="button">add to watched</button>
+      <button class="add-to-queue-btn modal-btn light-theme-btn" type="button">add to queue</button>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,139 @@
+.modal {
+  position: relative;
+  width: 280px;
+  padding: 48px 20px 41px;
+  background-color: $white;
+
+  @media screen and (max-width: 320px) {
+    width: 87vw;
+  }
+}
+
+.modal-img {
+  width: 240px;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 30px;
+  }
+}
+
+.modal-movie-details {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+  color: $dark;
+}
+
+.modal-movie-title {
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.movie-details-table {
+  margin-top: 20px;
+}
+
+.movie-details-item {
+  display: flex;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.movie-details-title {
+  min-width: 108px;
+  color: $popup-popularity;
+}
+
+.movie-details-info {
+  margin-left: 38px;
+
+  &:nth-child(n + 2) {
+    line-height: 1.167;
+  }
+}
+
+.modal-vote-avg,
+.modal-vote-count {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 36px;
+  height: 16px;
+  border-radius: 5px;
+}
+
+.modal-vote-avg {
+  color: $white;
+  background-color: $avg-rating-color;
+}
+
+.modal-vote-count {
+  background-color: $dark-bg;
+}
+
+.details-item-title {
+  text-transform: uppercase;
+}
+
+.about-movie-title {
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+.about-movie-info {
+  margin-top: 10px;
+  line-height: 1.667;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  & > .modal-btn:not(:last-child) {
+    margin-right: 14px;
+  }
+}
+
+.add-to-watched-btn,
+.add-to-queue-btn {
+  padding: 6px;
+  min-width: 112px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    display: flex;
+    width: 576px;
+    padding: 42px 28px 40px;
+  }
+
+  .modal-img {
+    width: 264px;
+    border-radius: 5px;
+  }
+
+  .modal-movie-details {
+    width: 264px;
+    margin-left: 32px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .modal {
+    width: 882px;
+    padding: 50px 30px 40px;
+  }
+
+  .modal-img {
+    width: 396px;
+    border-radius: 5px;
+  }
+
+  .modal-movie-details {
+    width: 396px;
+    margin-left: 30px;
+  }
+}
