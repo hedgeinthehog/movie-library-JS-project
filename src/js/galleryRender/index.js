@@ -42,6 +42,9 @@ function openModal(event) {
   event.preventDefault();
   const { target } = event;
   const movieTitle = target.alt;
+  if (!movieTitle) {
+    return;
+  }
   const markup = movie.renderMovieCard(movieTitle);
 
   const modal = basicLightbox.create(markup);
