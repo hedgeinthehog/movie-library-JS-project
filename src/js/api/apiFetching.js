@@ -48,3 +48,5 @@ const api = {
 };
 
 export default api;
+
+//console.dir(fetchFilmById())
