@@ -28,6 +28,9 @@
     @extend %visuallyHidden;
   }
 }
+body.dark-theme .pagination-elem {
+  color: $white;
+}
 
 .pagination-controls {
   cursor: pointer;
