@@ -36,7 +36,7 @@ function openModal(event) {
               window.removeEventListener("keydown", closeModalHandler);
             }
           }
-    // Возможность добавить кнопку закрытия модалки
+    // ability to add a "close modal button"
     //       const closeBtn = document.querySelector(".modal-close-btn");
     //   closeBtn.addEventListener("click", closeModal);
         }   
