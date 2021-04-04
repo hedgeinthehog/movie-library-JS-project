@@ -11,3 +11,4 @@ export default {
   watchedBtnRef: document.querySelector('#watched'),
   queueBtnRef: document.querySelector('#queue'),
 };
+
