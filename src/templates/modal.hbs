@@ -1,31 +1,22 @@
-   
-     <div  class = " modal " >
-                
-              <ul class="detalis-film list">
-                  <li class="detalis-film-img">
-                      <img src="{{backdrop_path}}" alt="{{film_title}}" class="card__image"/></li>
-                      
-                  <li class="detalis-film-about">
-                      <h2 class="film-title">{{film_title}}</h2>
-                      <ul class="list">
-                        <li class="statistics"><span class="statistics-title">Vote / Votes </span> <div class="rectangle"><span>{{vote}}</span></div> <div class="rectangle"><span>{{votes}}</span></div> </li>
-                        <li class="statistics"> <span class="statistics-title">Popularity </span> {{popularity}} </p>
-                        <li class="statistics"><span class="statistics-title">Original Title</span>   {{original_title}} </li>
-                        <li class="statistics"><span class="statistics-title">Genre </span>  {{genre}} </li> 
-                      </ul>
-                       <h3 class="about-title">About </h3>
-                       <p class="about">{{about}}</p>
-                      
-                    <ul class = "modal-button list">
-                      <li>
-                          <button  type ="submit" class = "modal-btn"> add to Watched </button>
-                      </li>
-                      <li>
-                          <button  type = "submit" class = "modal-btn"> add to queue </button>
-                      </li>
-                  </ul>
-                  </li>
-              </ul>
-
-          </div>     
-        
+<div class="modal">
+  <div class="modal-img">
+    <img src="{{backdrop_path}}" alt="{{title}}" class="card__image"/>
+  </div>
+  <div class="modal-movie-details">
+    <h2 class="modal-movie-title">{{title}}</h2>
+    <span class="details-item-title">Vote / Votes</span><span class="details-item-info">{{vote_average}}/{{vote_count}}</span>
+    <span class="details-item-title">Popularity</span><span class="details-item-info">{{popularity}}</span>
+    <span class="details-item-title">Original Title</span><span class="details-item-info">{{original_title}}</span>
+    <span class="details-item-title">Genre</span><span class="details-item-info">{{genres}}</span>
+    <h3 class="about-movie-title">About</h3>
+    <p class="about-movie-info">{{overview}}</p>
+    <ul class = "modal-buttons list">
+      <li>
+        <button type ="submit" class = "modal-btn">add to watched</button>
+      </li>
+      <li>
+        <button type = "submit" class = "modal-btn">add to queue</button>
+      </li>
+    </ul>
+  </div>
+</div> 
