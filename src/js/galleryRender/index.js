@@ -1,16 +1,18 @@
 import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
-const { prevRef, nextRef, searchInpRef, pageNumsRef } = refs;
+const { prevRef, nextRef, searchInpRef, pageNumsRef, moviesListRef } = refs;
 
 const movie = new MoviePagination('.movies-list');
 movie.init();
 
 searchInpRef.addEventListener('keydown', onPressEnterSearch);
-
 prevRef.addEventListener('click', movie.goToPrevPage);
 nextRef.addEventListener('click', movie.goToNextPage);
 pageNumsRef.addEventListener('click', movie.goToPage);
+moviesListRef.addEventListener('click', openModal);
 
 function onPressEnterSearch(event) {
   //do search on Enter press
@@ -34,4 +36,14 @@ function requestMovie() {
     movie.byQueryFlag = true;
     return movie.init();
   }
+}
+
+function openModal(event) {
+  event.preventDefault();
+  const { target } = event;
+  const movieTitle = target.alt;
+  const markup = movie.renderMovieCard(movieTitle);
+
+  const modal = basicLightbox.create(markup);
+  modal.show();
 }

@@ -1,6 +1,7 @@
 import api from '../api/apiFetching';
 import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
 import pageNumetationTemplate from '../../templates/page-numeration.hbs';
+import modalMovieCardTemplate from '../../templates/modal.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
 import getFromStorage from '../getFromStorage/getFromStorage';
@@ -26,7 +27,8 @@ class MoviePagination {
     this.goToNextPage = this.goToNextPage.bind(this);
     this.goToPage = this.goToPage.bind(this);
     this.init = this.init.bind(this);
-    this.bind = this.pageReset(this);
+    this.pageReset = this.pageReset.bind(this);
+    this.renderMovieCard = this.renderMovieCard.bind(this);
   }
 
   get movieType() {
@@ -119,6 +121,7 @@ class MoviePagination {
       switchErrorHide(results);
       this.totalPages = total_pages;
       this.#movies = results;
+      console.log(this.#movies);
       return results;
     });
   }
@@ -364,6 +367,11 @@ class MoviePagination {
     if (this.currentPage === pageNum) pageBtn.classList.add('active-page');
     pageBtn.innerText = pageNum;
     return pageBtn;
+  }
+
+  renderMovieCard(title) {
+    const movie = this.#movies.find(movie => movie.title === title);
+    return modalMovieCardTemplate(movie);
   }
 
   //function that set helpers data for fetching movies from library by ids array from watched list
