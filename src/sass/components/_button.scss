@@ -18,8 +18,14 @@
     margin-right: 19.94px;
   }
 
+  &.light-theme-btn {
+    color: $dark;
+    border: 1px solid $dark;
+  }
+
   &:hover,
   &:focus {
+    color: $white;
     background-color: $avg-rating-color;
     outline: none;
     border: none;
