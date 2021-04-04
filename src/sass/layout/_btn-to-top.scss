@@ -1,7 +1,7 @@
 #back-to-top {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  right: 10px;
+  bottom: 30px;
   width: 60px;
   height: 60px;
   border: none;
@@ -19,11 +19,13 @@
   transform: scale(1);
   transition: 0.5s;
 }
+
 #back-to-top:hover {
   -webkit-animation: none;
   -moz-animation: none;
   -ms-animation: none;
   animation: none;
+  opacity: 1;
   transform: scale(1.2);
   transition: 0.5s;
 }
