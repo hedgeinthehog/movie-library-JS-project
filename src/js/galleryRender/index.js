@@ -46,4 +46,13 @@ function openModal(event) {
 
   const modal = basicLightbox.create(markup);
   modal.show();
+
+  window.addEventListener('keydown', closeModalHandler);
+
+  function closeModalHandler(event) {
+    if (event.code === 'Escape') {
+      modal.close();
+      window.removeEventListener('keydown', closeModalHandler);
+    }
+  }
 }
