@@ -121,7 +121,6 @@ class MoviePagination {
       switchErrorHide(results);
       this.totalPages = total_pages;
       this.#movies = results;
-      console.log(this.#movies);
       return results;
     });
   }
