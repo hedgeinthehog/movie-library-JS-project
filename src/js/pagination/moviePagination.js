@@ -3,7 +3,6 @@ import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
 import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
-import workLoader from '../spinner/loader';
 import getFromStorage from '../getFromStorage/getFromStorage';
 
 class MoviePagination {
