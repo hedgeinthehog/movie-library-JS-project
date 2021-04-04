@@ -12,6 +12,7 @@ moviesListRef.addEventListener('click', openModal)
 function openModal(event) {
     event.preventDefault();
     const { target } = event;
+    // console.log(event.target.nodeName)
     const titleMovie = target.alt;
     if(!titleMovie) {
         return
@@ -22,9 +23,23 @@ function openModal(event) {
         data.find(result => {
             if(result.title === titleMovie) {
                 const markup = cardTemplate(result);
-                console.log(result);
+                // console.log(result);
                 const modal = basicLightbox.create(markup);
                 modal.show();
+
+                window.addEventListener("keydown", closeModalHandler);
+                // console.dir(window)
+    
+          function closeModalHandler(event) {
+            if (event.code === "Escape") {
+              modal.close();
+              window.removeEventListener("keydown", closeModalHandler);
             }
-        }))
+          }
+    // Возможность добавить кнопку закрытия модалки
+    //       const closeBtn = document.querySelector(".modal-close-btn");
+    //   closeBtn.addEventListener("click", closeModal);
+        }   
+    }))    
 }
+
