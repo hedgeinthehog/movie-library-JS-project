@@ -1,7 +1,7 @@
 import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
 
-const { watchedBtnRef, queueBtnRef } = refs;
+const { watchedBtnRef, queueBtnRef, loaderRef} = refs;
 
 
 const movie = new MoviePagination('.movies-list');
@@ -9,6 +9,7 @@ const movie = new MoviePagination('.movies-list');
 movie.libraryWatchedHelpersData();
 movie.init();
 movie.resetLibraryHelpersData();
+loaderRef.classList.add('visually-hidden');
 
 watchedBtnRef.addEventListener('click', showWatchedOnClick);
 queueBtnRef.addEventListener('click', showQueueOnClick);
