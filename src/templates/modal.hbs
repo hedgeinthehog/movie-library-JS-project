@@ -1,22 +1,20 @@
 <div class="modal">
-  <div class="modal-img">
-    <img src="{{backdrop_path}}" alt="{{title}}" class="card__image"/>
+  <div>
+    <img class="modal-img" src="{{backdrop_path}}" alt="{{title}}" class="card__image"/>
   </div>
   <div class="modal-movie-details">
     <h2 class="modal-movie-title">{{title}}</h2>
-    <span class="details-item-title">Vote / Votes</span><span class="details-item-info">{{vote_average}}/{{vote_count}}</span>
-    <span class="details-item-title">Popularity</span><span class="details-item-info">{{popularity}}</span>
-    <span class="details-item-title">Original Title</span><span class="details-item-info">{{original_title}}</span>
-    <span class="details-item-title">Genre</span><span class="details-item-info">{{genres}}</span>
-    <h3 class="about-movie-title">About</h3>
+    <div class="movie-details-table">
+      <div class="movie-details-item"><p class="movie-details-title">Vote / Votes</p><p class="details-item-info"><span class="modal-vote-avg">{{vote_average}}</span> / <span class="modal-vote-count">{{vote_count}}</span></p></div>
+      <div class="movie-details-item"><p class="movie-details-title">Popularity</p><p class="details-item-info">{{popularity}}</p></div>
+      <div class="movie-details-item"><p class="movie-details-title">Original Title</p><p class="details-item-info details-item-title">{{original_title}}</p></div>
+      <div class="movie-details-item"><p class="movie-details-title">Genre</p><p class="details-item-info">{{genres}}</p></div>
+    </div>
+    <p class="about-movie-title">About</p>
     <p class="about-movie-info">{{overview}}</p>
-    <ul class = "modal-buttons list">
-      <li>
-        <button type ="submit" class = "modal-btn">add to watched</button>
-      </li>
-      <li>
-        <button type = "submit" class = "modal-btn">add to queue</button>
-      </li>
-    </ul>
+    <div class= "modal-buttons">
+      <button class="add-to-watched-btn modal-btn light-theme-btn" type="button">add to watched</button>
+      <button class="add-to-queue-btn modal-btn light-theme-btn" type="button">add to queue</button>
+    </div>
   </div>
 </div> 
