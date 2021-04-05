@@ -50,6 +50,9 @@ function openModal(event) {
   event.preventDefault();
   const { target } = event;
   const movieTitle = target.alt;
+  if (!movieTitle) {
+    return;
+  }
   const markup = movie.renderMovieCard(movieTitle);
   const movieObj = movie.findMovieForLocalStorage(movieTitle);
   
