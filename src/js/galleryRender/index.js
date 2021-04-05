@@ -2,8 +2,16 @@ import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import {addToStorage} from '../addToStorage/addToStorage';
 
-const { prevRef, nextRef, searchInpRef, pageNumsRef, moviesListRef } = refs;
+
+const { 
+  prevRef, 
+  nextRef, 
+  searchInpRef, 
+  pageNumsRef, 
+  moviesListRef, 
+} = refs;
 
 const movie = new MoviePagination('.movies-list');
 movie.init();
@@ -43,15 +51,29 @@ function openModal(event) {
   const { target } = event;
   const movieTitle = target.alt;
   const markup = movie.renderMovieCard(movieTitle);
-
+  const movieObj = movie.findMovieForLocalStorage(movieTitle);
+  
   const modal = basicLightbox.create(markup);
   modal.show();
+  
+  const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
+  const addToWatchedBtnRef = document.querySelector('#add-to-watched-btn');
+  const addToQueue = addToQueueBtnRef.addEventListener('click', addToQueueOnClick);
+  const addToWatched = addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
+  function addToQueueOnClick(){
+      return addToStorage(movieObj, 'queue');
+    }
+  function addToWatchedOnClick(){
+      return addToStorage(movieObj, 'watched');
+  }
 
   window.addEventListener('keydown', closeModalHandler);
 
   function closeModalHandler(event) {
     if (event.code === 'Escape') {
       modal.close();
+      addToQueueBtnRef.removeEventListener(addToQueue);
+      addToWatchedBtnRef.removeEventListener(addToWatched);
       window.removeEventListener('keydown', closeModalHandler);
     }
   }
