@@ -128,7 +128,7 @@ class MoviePagination {
 
   // fetches movies from library depending on movieType
   fetchMoviesFromLibrary() {
-    const moviesId = getFromStorage(this.movieType); 
+    const moviesId = getFromStorage(this.movieType);
     let promisesArray = [];
     moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)));
     return Promise.all(promisesArray).then(data => {
@@ -263,7 +263,7 @@ class MoviePagination {
     if (this.currentPage === 1) {
       return;
     }
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage -= 1;
     this.fetchMovies().then(results => {
       this.#movies = results;
@@ -276,7 +276,7 @@ class MoviePagination {
     if (this.currentPage === this.totalPages) {
       return;
     }
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage += 1;
     this.fetchMovies().then(results => {
       this.#movies = results;
@@ -290,6 +290,7 @@ class MoviePagination {
     const clickedElem = event.target;
     if (clickedElem.matches('button')) {
       const page = Number(clickedElem.innerHTML);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (this.currentPage === page) return;
       this.currentPage = page;
@@ -374,8 +375,8 @@ class MoviePagination {
     return modalMovieCardTemplate(movie);
   }
 
-  //return the movie object by title for localStorage 
-  findMovieForLocalStorage(title){
+  //return the movie object by title for localStorage
+  findMovieForLocalStorage(title) {
     return this.#movies.find(movie => movie.title === title);
   }
 
