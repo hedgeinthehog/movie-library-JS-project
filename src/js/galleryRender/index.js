@@ -2,7 +2,11 @@ import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import {addToStorage, resetStorage} from '../addToStorage/addToStorage';
+import {addToStorage, 
+  resetStorage, 
+  removeFromStorage, 
+  filmInQueue, 
+  filmInWatched} from '../addToStorage/addToStorage';
 
 
 const { 
@@ -58,13 +62,34 @@ function openModal(event) {
   
   const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
   const addToWatchedBtnRef = document.querySelector('#add-to-watched-btn');
-  const addToQueue = addToQueueBtnRef.addEventListener('click', addToQueueOnClick);
-  const addToWatched = addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
+  addToQueueBtnRef.addEventListener('click', addToQueueOnClick);
+  addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
+  
   function addToQueueOnClick(){
-      return addToStorage(movieObj, 'queue');
+    if(filmInQueue(movieObj)){
+      addToQueueBtnRef.textContent = 'remove from queue';
+      addToQueueBtnRef.addEventListener('click', queueRemoveFilmOnClick);
+      function queueRemoveFilmOnClick(){
+        addToQueueBtnRef.textContent = 'add to queue'
+        addToQueueBtnRef.removeEventListener( 'click', queueRemoveFilmOnClick);
+        return removeFromStorage(movieObj, 'queue');
+      }
     }
+    else return addToStorage(movieObj, 'queue');
+    }
+
   function addToWatchedOnClick(){
-      return addToStorage(movieObj, 'watched');
+    if(filmInWatched(movieObj)){
+      addToWatchedBtnRef.textContent = 'remove from watched';
+      addToWatchedBtnRef.addEventListener('click', watchedRemoveFilmOnClick);
+
+      function watchedRemoveFilmOnClick(){
+        addToWatchedBtnRef.textContent = 'add to watched'
+        addToWatchedBtnRef.removeEventListener('click', watchedRemoveFilmOnClick);
+        return removeFromStorage(movieObj, 'watched');
+      }
+    }
+     else return addToStorage(movieObj, 'watched');
   }
 
   window.addEventListener('keydown', closeModalHandler);
@@ -72,8 +97,8 @@ function openModal(event) {
   function closeModalHandler(event) {
     if (event.code === 'Escape') {
       modal.close();
-      addToQueueBtnRef.removeEventListener(addToQueue);
-      addToWatchedBtnRef.removeEventListener(addToWatched);
+      addToQueueBtnRef.removeEventListener('click', addToQueueOnClick);
+      addToWatchedBtnRef.removeEventListener('click', addToWatchedOnClick);
       window.removeEventListener('keydown', closeModalHandler);
     }
   }

@@ -20,8 +20,6 @@ function getCurrentStorage() {
 
 function addToStorage(filmObj, filmType) {
   const [watched, queue] = getCurrentStorage();
-  // const watchedId = watched.map(film => film.id);
-  // const queueId = queue.map(film => film.id);
 
   switch (filmType) {
     case 'watched':
@@ -57,7 +55,7 @@ function addToStorage(filmObj, filmType) {
       }
       break;
     default:
-      console.log('Fil type is not correct!');
+      console.log('Film type is not correct!');
   }
 }
 
@@ -68,4 +66,46 @@ const resetStorage = function () {
   localStorage.removeItem('queue');
 };
 
-export { addToStorage, resetStorage };
+function removeFromStorage(filmObj, filmType){
+  const [watched, queue] = getCurrentStorage();
+
+  switch (filmType) {
+    case 'watched':
+      if (watched.includes(filmObj.id)) {
+        const filteredWatched = watched.filter(filmId => {
+          return filmId !== filmObj.id;
+        });
+        localStorage.setItem('watched', JSON.stringify(filteredWatched));
+      } else {
+        console.log('In Watched is no such film!')
+      }
+      break;
+    case 'queue':
+      if (queue.includes(filmObj.id)) {
+        const filteredQueue = queue.filter(filmId => {
+          return filmId !== filmObj.id;
+        });
+        localStorage.setItem('queue', JSON.stringify(filteredQueue));
+      } else {
+        console.log('In Queue is no such film!')
+      }
+      break;
+    default:
+      console.log('Film type is not correct!');
+  }
+}
+
+function filmInWatched(filmObj){
+  const [watched] = getCurrentStorage();
+  const includeInWatched = watched.includes(filmObj.id);
+  if (includeInWatched) return true;
+  else return false;
+}
+function filmInQueue(filmObj){
+  const [queue] = getCurrentStorage();
+  const includeInQueue = queue.includes(filmObj.id);
+  if(includeInQueue) return true;
+  else return false;
+}
+
+export { addToStorage, resetStorage, removeFromStorage, filmInQueue, filmInWatched};
