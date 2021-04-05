@@ -85,8 +85,10 @@ function removeFromStorage(filmObj, filmType){
         const filteredQueue = queue.filter(filmId => {
           return filmId !== filmObj.id;
         });
+        console.log(filmObj);
         localStorage.setItem('queue', JSON.stringify(filteredQueue));
       } else {
+        console.log(filmObj);
         console.log('In Queue is no such film!')
       }
       break;
@@ -96,13 +98,13 @@ function removeFromStorage(filmObj, filmType){
 }
 
 function filmInWatched(filmObj){
-  const [watched] = getCurrentStorage();
+  const [watched, queue] = getCurrentStorage();
   const includeInWatched = watched.includes(filmObj.id);
   if (includeInWatched) return true;
   else return false;
 }
 function filmInQueue(filmObj){
-  const [queue] = getCurrentStorage();
+  const [watced, queue] = getCurrentStorage();
   const includeInQueue = queue.includes(filmObj.id);
   if(includeInQueue) return true;
   else return false;

@@ -8,7 +8,7 @@ import {addToStorage,
   filmInQueue, 
   filmInWatched} from '../addToStorage/addToStorage';
 
-
+// resetStorage();
 const { 
   prevRef, 
   nextRef, 
@@ -60,36 +60,44 @@ function openModal(event) {
   const modal = basicLightbox.create(markup);
   modal.show();
   
-  const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
+  const addToQueueBtnRef = document.querySelector('#add-to-queue-btn');
   const addToWatchedBtnRef = document.querySelector('#add-to-watched-btn');
   addToQueueBtnRef.addEventListener('click', addToQueueOnClick);
   addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
-  
+
+  if(filmInQueue(movieObj)){
+    const expanded = addToQueueBtnRef.getAttribute("aria-expanded") === "true" || false;
+    togleTexstContentQueue(expanded);
+    addToQueueBtnRef.setAttribute("aria-expanded", !expanded);
+  }
+  if(filmInWatched(movieObj)){
+    const expanded = addToWatchedBtnRef.getAttribute("aria-expanded") === "true" || false;
+    console.log(expanded)
+    togleTexstContentWatched(expanded);
+    addToWatchedBtnRef.setAttribute("aria-expanded", !expanded);
+  }
+
   function addToQueueOnClick(){
-    if(filmInQueue(movieObj)){
-      addToQueueBtnRef.textContent = 'remove from queue';
-      addToQueueBtnRef.addEventListener('click', queueRemoveFilmOnClick);
-      function queueRemoveFilmOnClick(){
-        addToQueueBtnRef.textContent = 'add to queue'
-        addToQueueBtnRef.removeEventListener( 'click', queueRemoveFilmOnClick);
-        return removeFromStorage(movieObj, 'queue');
-      }
-    }
-    else return addToStorage(movieObj, 'queue');
-    }
+    const expanded = addToQueueBtnRef.getAttribute("aria-expanded") === "true" || false;
+    addToStorage(movieObj, 'queue');
+    togleTexstContentQueue(expanded);
+    addToQueueBtnRef.setAttribute("aria-expanded", !expanded);
+  }
+  function togleTexstContentQueue(expanded){
+    if(!expanded) return addToQueueBtnRef.textContent = 'add to queue';
+     else return addToQueueBtnRef.textContent = 'remove from queue';
+  }
 
+  
   function addToWatchedOnClick(){
-    if(filmInWatched(movieObj)){
-      addToWatchedBtnRef.textContent = 'remove from watched';
-      addToWatchedBtnRef.addEventListener('click', watchedRemoveFilmOnClick);
-
-      function watchedRemoveFilmOnClick(){
-        addToWatchedBtnRef.textContent = 'add to watched'
-        addToWatchedBtnRef.removeEventListener('click', watchedRemoveFilmOnClick);
-        return removeFromStorage(movieObj, 'watched');
-      }
-    }
-     else return addToStorage(movieObj, 'watched');
+    const expanded = addToWatchedBtnRef.getAttribute("aria-expanded") === "true" || false;
+    addToStorage(movieObj, 'watched');
+    togleTexstContentWatched(expanded);
+    addToWatchedBtnRef.setAttribute("aria-expanded", !expanded);
+  }
+  function togleTexstContentWatched(expanded){
+    if(expanded) return addToWatchedBtnRef.textContent = 'add to watched';
+     else return addToWatchedBtnRef.textContent = 'remove from watched';
   }
 
   window.addEventListener('keydown', closeModalHandler);
@@ -97,8 +105,8 @@ function openModal(event) {
   function closeModalHandler(event) {
     if (event.code === 'Escape') {
       modal.close();
-      addToQueueBtnRef.removeEventListener('click', addToQueueOnClick);
-      addToWatchedBtnRef.removeEventListener('click', addToWatchedOnClick);
+      // addToQueueBtnRef.removeEventListener('click', addToQueueOnClick);
+      // addToWatchedBtnRef.removeEventListener('click', addToWatchedOnClick);
       window.removeEventListener('keydown', closeModalHandler);
     }
   }
