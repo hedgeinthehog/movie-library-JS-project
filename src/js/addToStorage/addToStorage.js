@@ -20,44 +20,44 @@ function getCurrentStorage() {
 
 function addToStorage(filmObj, filmType) {
   const [watched, queue] = getCurrentStorage();
-  const watchedId = watched.map(film => film.id);
-  const queueId = queue.map(film => film.id);
+  // const watchedId = watched.map(film => film.id);
+  // const queueId = queue.map(film => film.id);
 
   switch (filmType) {
     case 'watched':
-      if (!watchedId.includes(filmObj.id)) {
-        watched.push(filmObj);
-        const filteredQueue = queue.filter(film => {
-          return film.id !== filmObj.id;
+      if (!watched.includes(filmObj.id)) {
+        watched.push(filmObj.id);
+        const filteredQueue = queue.filter(filmId => {
+          return filmId !== filmObj.id;
         });
 
         localStorage.setItem('watched', JSON.stringify(watched));
         localStorage.setItem('queue', JSON.stringify(filteredQueue));
       } else {
-        const filteredWatched = watched.filter(film => {
-          return film.id !== filmObj.id;
+        const filteredWatched = watched.filter(filmId => {
+          return filmId !== filmObj.id;
         });
         localStorage.setItem('watched', JSON.stringify(filteredWatched));
       }
       break;
     case 'queue':
-      if (!queueId.includes(filmObj.id)) {
-        queue.push(filmObj);
-        const filtredWatched = watched.filter(film => {
-          return film.id !== filmObj.id;
+      if (!queue.includes(filmObj.id)) {
+        queue.push(filmObj.id);
+        const filtredWatched = watched.filter(filmId => {
+          return filmId !== filmObj.id;
         });
 
         localStorage.setItem('watched', JSON.stringify(filtredWatched));
         localStorage.setItem('queue', JSON.stringify(queue));
       } else {
-        const filteredQueue = queue.filter(film => {
-          return film.id !== filmObj.id;
+        const filteredQueue = queue.filter(filmId => {
+          return filmId !== filmObj.id;
         });
         localStorage.setItem('queue', JSON.stringify(filteredQueue));
       }
       break;
     default:
-      console.log('Не коректно указан filmType');
+      console.log('Fil type is not correct!');
   }
 }
 
