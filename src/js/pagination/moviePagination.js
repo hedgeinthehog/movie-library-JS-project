@@ -128,13 +128,11 @@ class MoviePagination {
 
   // fetches movies from library depending on movieType
   fetchMoviesFromLibrary() {
-    const moviesArr = getFromStorage(this.movieType);  //uncomment line to use localStorage arrays of ids
-    const moviesId = moviesArr.map(movieItem => movieItem.id);
-    // const moviesId = [550, 551, 552, 553, 554, 704338]; //testing ids array  //comment or delete line to use localStorage arrays of ids
+    const moviesId = getFromStorage(this.movieType); 
     let promisesArray = [];
     moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)));
     return Promise.all(promisesArray).then(data => {
-      this.movies = data;
+      this.#movies = data;
       return data;
     });
   }

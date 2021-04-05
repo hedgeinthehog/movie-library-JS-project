@@ -2,7 +2,7 @@ import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import {addToStorage} from '../addToStorage/addToStorage';
+import {addToStorage, resetStorage} from '../addToStorage/addToStorage';
 
 
 const { 
