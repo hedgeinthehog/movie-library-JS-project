@@ -17,7 +17,7 @@ const {
 const movie = new MoviePagination('.movies-list');
 
 movie.libraryWatchedHelpersData();
-movie.paginateLibrary();
+movie.init();
 loaderRef.classList.add('visually-hidden');
 
 prevRef.addEventListener('click', movie.goToPrevPage);
