@@ -21,6 +21,7 @@ class MoviePagination {
     this.forLibraryFlag = false;
     this.currentPage = 1;
     this.totalPages = 0;
+    this.rowsPerLibraryPage = 0;
     this.pageNumsRef = document.querySelector('.page-numbers');
     this.totalGenres = [];
     this.goToPrevPage = this.goToPrevPage.bind(this);
@@ -30,54 +31,10 @@ class MoviePagination {
     this.pageReset = this.pageReset.bind(this);
     this.renderMovieCard = this.renderMovieCard.bind(this);
     this.findMovieForLocalStorage = this.findMovieForLocalStorage.bind(this);
+    this.paginateLibrary = this.paginateLibrary.bind(this);
   }
 
-  get movieType() {
-    return this.movieType;
-  }
-  set movieType(movieType) {
-    this.movieType = movieType;
-  }
-
-  get forLibraryFlag() {
-    return this.forLibraryFlag;
-  }
-  set forLibraryFlag(forLibraryFlag) {
-    this.forLibraryFlag = forLibraryFlag;
-  }
-
-  get byQueryFlag() {
-    return this.byQueryFlag;
-  }
-
-  set byQueryFlag(byQueryFlag) {
-    this.byQueryFlag = byQueryFlag;
-  }
-
-  get searchKey() {
-    return this.searchKey;
-  }
-
-  set searchKey(searchKey) {
-    if (!searchKey) {
-      console.error('No query for search!');
-    }
-    this.searchKey = searchKey;
-  }
-
-  get movies() {
-    return this.#movies;
-  }
-
-  set movies(movieList) {
-    if (!movieList) {
-      console.error('list non exist');
-    }
-    this.#movies = movieList;
-    this.render();
-  }
-
-  // run this first in outer code - gets list of genres from the server and shows the first page of trending movies
+  // gets list of genres from the server and shows the first page of trending movies
   init() {
     this.getAllGenres();
     this.loadPage();
@@ -89,6 +46,31 @@ class MoviePagination {
       this.prepareMovies();
       this.render();
     });
+  }
+
+  paginateLibrary() {
+    if (window.screen.width >= 1024) {
+      this.rowsPerLibraryPage = 9;
+    } else if (window.screen.width >= 768) {
+      this.rowsPerLibraryPage = 8;
+    } else {
+      this.rowsPerLibraryPage = 4;
+    }
+    this.getAllGenres();
+    this.fetchMovies().then(data => {
+      this.prepareMovies();
+      this.renderlibraryPage();
+    });
+  }
+
+  // renders My Library Watched/Queued movies
+  renderlibraryPage() {
+    const rowsPerPage = this.rowsPerLibraryPage;
+    let loopStart = rowsPerPage * (this.currentPage - 1);
+    let loopEnd = loopStart + rowsPerPage;
+    let paginatedItems = this.#movies.slice(loopStart, loopEnd);
+    this.setPageNumbers();
+    this.element.innerHTML = moviesListTemplate(paginatedItems);
   }
 
   //fetch trending or searching movies by byQueryFlag value
@@ -132,6 +114,7 @@ class MoviePagination {
     let promisesArray = [];
     moviesId.forEach(movieId => promisesArray.push(api.fetchFilmById(movieId)));
     return Promise.all(promisesArray).then(data => {
+      this.totalPages = Math.ceil(data.length / this.rowsPerLibraryPage);
       this.#movies = data;
       return data;
     });
@@ -139,7 +122,7 @@ class MoviePagination {
 
   // renders markup
   render() {
-    this.element.innerHTML = moviesListTemplate(this.movies);
+    this.element.innerHTML = moviesListTemplate(this.#movies);
     this.setPageNumbers();
   }
 
@@ -157,12 +140,14 @@ class MoviePagination {
 
   // prepares info for movie cards
   prepareMovies() {
-    this.movies.forEach(movie => {
-      this.getMovieGenres(movie);
-      this.getReleaseYear(movie);
-      this.getPosterImg(movie);
-      this.validateAvgVote(movie);
-      this.validateMovieDescription(movie);
+    this.#movies.forEach(movie => {
+      if (movie) {
+        this.getMovieGenres(movie);
+        this.getReleaseYear(movie);
+        this.getPosterImg(movie);
+        this.validateAvgVote(movie);
+        this.validateMovieDescription(movie);
+      }
     });
   }
 
@@ -265,6 +250,10 @@ class MoviePagination {
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage -= 1;
+    if (this.forLibraryFlag) {
+      this.renderlibraryPage();
+      return;
+    }
     this.fetchMovies().then(results => {
       this.#movies = results;
       this.prepareMovies();
@@ -278,6 +267,10 @@ class MoviePagination {
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage += 1;
+    if (this.forLibraryFlag) {
+      this.renderlibraryPage();
+      return;
+    }
     this.fetchMovies().then(results => {
       this.#movies = results;
       this.prepareMovies();
@@ -294,6 +287,10 @@ class MoviePagination {
 
       if (this.currentPage === page) return;
       this.currentPage = page;
+      if (this.forLibraryFlag) {
+        this.renderlibraryPage();
+        return;
+      }
       this.fetchMovies().then(results => {
         this.#movies = results;
         this.prepareMovies();
@@ -382,21 +379,23 @@ class MoviePagination {
 
   //function that set helpers data for fetching movies from library by ids array from watched list
   libraryWatchedHelpersData() {
+    this.currentPage = 1;
     this.movieType = 'watched';
     this.forLibraryFlag = true;
   }
 
   //function that set helpers data for fetching movies from library by ids array from queue list
   libraryQueueHelpersData() {
+    this.currentPage = 1;
     this.movieType = 'queue';
     this.forLibraryFlag = true;
   }
 
   //function for clearing helpers data for fetching movies from library by id
-  resetLibraryHelpersData() {
-    this.movieType = '';
-    this.forLibraryFlag = false;
-  }
+  // resetLibraryHelpersData() {
+  //   this.movieType = '';
+  //   this.forLibraryFlag = false;
+  // }
 }
 
 export default MoviePagination;
