@@ -72,13 +72,22 @@ body.dark-theme .list-item:hover {
 
 .movie-card-short-info {
   height: 32px;
+  width: 280px;
+  @media screen and (min-width: 768px) {
+    width: 294px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 274px;
+  }
 }
 
 .movie-card-title {
+  height: 16px;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   text-transform: uppercase;
+  overflow: hidden;
 }
 
 .movie-card-text {
