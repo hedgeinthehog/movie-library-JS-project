@@ -4,7 +4,7 @@ import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import modalMovieCardTemplate from '../../templates/modal.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
-import getFromStorage from '../getFromStorage/getFromStorage';
+import getFromStorage from '../localStoragemovies/getFromStorage';
 
 class MoviePagination {
   #movies = [];
