@@ -1,13 +1,13 @@
 //for working run - npm i basiclightbox
 
 import * as basicLightbox from 'basiclightbox';
-import eleonoraUrl from '../images/team-eleonora.png';
-import kirilUrl from '../images/team-kiril.png';
-import romanUrl from '../images/team-roman.png';
-import MaxUrl from '../images/team-max.png';
-import ihorUrl from '../images/team-igor.png';
-import nataliyaUrl from '../images/team-nataliya.png';
-import mykolaUrl from '../images/team-mykola.png';
+import eleonoraUrl from '../images/team/team-eleonora.png';
+import kirilUrl from '../images/team/team-kiril.png';
+import romanUrl from '../images/team/team-roman.png';
+import MaxUrl from '../images/team/team-max.png';
+import ihorUrl from '../images/team/team-igor.png';
+import nataliyaUrl from '../images/team/team-nataliya.png';
+import mykolaUrl from '../images/team/team-mykola.png';
 
 const markup = `<div class="team-wrapper">
 <div class="team-card">
