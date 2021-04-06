@@ -20,8 +20,6 @@ function getCurrentStorage() {
 
 function addToStorage(filmObj, filmType) {
   const [watched, queue] = getCurrentStorage();
-  // const watchedId = watched.map(film => film.id);
-  // const queueId = queue.map(film => film.id);
 
   switch (filmType) {
     case 'watched':
@@ -57,15 +55,30 @@ function addToStorage(filmObj, filmType) {
       }
       break;
     default:
-      console.log('Fil type is not correct!');
+      console.log('Film type is not correct!');
   }
 }
 
 //Функция для очистки localStorage
-
 const resetStorage = function () {
   localStorage.removeItem('watched');
   localStorage.removeItem('queue');
 };
 
-export { addToStorage, resetStorage };
+// проверка пренидлежит ли фильм к watched
+function filmInWatched(filmObj){
+  const [watched, queue] = getCurrentStorage();
+  const includeInWatched = watched.includes(filmObj.id);
+  if (includeInWatched) return true;
+  else return false;
+}
+
+// проверка пренидлежит ли фильм к queue
+function filmInQueue(filmObj){
+  const [watced, queue] = getCurrentStorage();
+  const includeInQueue = queue.includes(filmObj.id);
+  if(includeInQueue) return true;
+  else return false;
+}
+
+export { addToStorage, resetStorage, filmInQueue, filmInWatched};
