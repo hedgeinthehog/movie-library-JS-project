@@ -4,7 +4,7 @@ import * as basicLightbox from 'basiclightbox';
 import eleonoraUrl from '../images/team/team-eleonora.png';
 import kirilUrl from '../images/team/team-kiril.png';
 import romanUrl from '../images/team/team-roman.png';
-import MaxUrl from '../images/team/team-max.png';
+import MaxUrl from '../images/team/team-max.jpg';
 import ihorUrl from '../images/team/team-igor.png';
 import nataliyaUrl from '../images/team/team-nataliya.png';
 import mykolaUrl from '../images/team/team-mykola.png';
