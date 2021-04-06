@@ -2,17 +2,13 @@ import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import {addToStorage,  
-  filmInQueue, 
-  filmInWatched} from '../addToStorage/addToStorage';
+import {
+  addToStorage,
+  filmInQueue,
+  filmInWatched,
+} from '../addToStorage/addToStorage';
 
-const { 
-  prevRef, 
-  nextRef, 
-  searchInpRef, 
-  pageNumsRef, 
-  moviesListRef, 
-} = refs;
+const { prevRef, nextRef, searchInpRef, pageNumsRef, moviesListRef } = refs;
 
 const movie = new MoviePagination('.movies-list');
 movie.init();
@@ -57,60 +53,62 @@ function openModal(event) {
   }
   const markup = movie.renderMovieCard(movieTitle);
   const movieObj = movie.findMovieForLocalStorage(movieTitle);
-  
+
   const modal = basicLightbox.create(markup);
   modal.show();
   
+  const closeBtn = document.querySelector('.modal-close-btn');
   const addToQueueBtnRef = document.querySelector('#add-to-queue-btn');
   const addToWatchedBtnRef = document.querySelector('#add-to-watched-btn');
   addToQueueBtnRef.addEventListener('click', addToQueueOnClick);
   addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
+  closeBtn.addEventListener('click', () => modal.close());
 
-  if(filmInQueue(movieObj)){
+  if (filmInQueue(movieObj)) {
     addToQueueBtnRef.textContent = 'remove from queue';
     addToWatchedBtnRef.textContent = 'add to watched';
   }
-  if(filmInWatched(movieObj)){
+  if (filmInWatched(movieObj)) {
     addToWatchedBtnRef.textContent = 'remove from watched';
     addToQueueBtnRef.textContent = 'add to queue';
   }
 
-  function addToQueueOnClick(){
+  function addToQueueOnClick() {
     //add and remove film from queue and change buttons text
-    if(!filmInQueue(movieObj) && !filmInWatched(movieObj)){
+    if (!filmInQueue(movieObj) && !filmInWatched(movieObj)) {
       addToQueueBtnRef.textContent = 'remove from queue';
       addToWatchedBtnRef.textContent = 'add to watched';
       return addToStorage(movieObj, 'queue');
     }
-    if(filmInQueue(movieObj) && !filmInWatched(movieObj)){
+    if (filmInQueue(movieObj) && !filmInWatched(movieObj)) {
       addToQueueBtnRef.textContent = 'add to queue';
       addToWatchedBtnRef.textContent = 'add to watched';
       return addToStorage(movieObj, 'queue');
     }
-   if(!filmInQueue(movieObj) && filmInWatched(movieObj)){
-     addToQueueBtnRef.textContent = 'remove from queue';
-     addToWatchedBtnRef.textContent = 'add to watched';
-     return addToStorage(movieObj, 'queue');
-   }
+    if (!filmInQueue(movieObj) && filmInWatched(movieObj)) {
+      addToQueueBtnRef.textContent = 'remove from queue';
+      addToWatchedBtnRef.textContent = 'add to watched';
+      return addToStorage(movieObj, 'queue');
+    }
   }
 
-  function addToWatchedOnClick(){
-     //add and remove film from watched and change buttons text
-    if(!filmInQueue(movieObj) && !filmInWatched(movieObj)){
+  function addToWatchedOnClick() {
+    //add and remove film from watched and change buttons text
+    if (!filmInQueue(movieObj) && !filmInWatched(movieObj)) {
       addToWatchedBtnRef.textContent = 'remove from watched';
       addToQueueBtnRef.textContent = 'add to queue';
       return addToStorage(movieObj, 'watched');
     }
-    if(filmInWatched(movieObj) && !filmInQueue(movieObj)){
+    if (filmInWatched(movieObj) && !filmInQueue(movieObj)) {
       addToWatchedBtnRef.textContent = 'add to watched';
       addToQueueBtnRef.textContent = 'add to queue';
       return addToStorage(movieObj, 'watched');
     }
-     if(!filmInWatched(movieObj) && filmInQueue(movieObj)){
-       addToWatchedBtnRef.textContent = 'remove from watched';
-       addToQueueBtnRef.textContent = 'add to queue';
-       return addToStorage(movieObj, 'watched');
-     }
+    if (!filmInWatched(movieObj) && filmInQueue(movieObj)) {
+      addToWatchedBtnRef.textContent = 'remove from watched';
+      addToQueueBtnRef.textContent = 'add to queue';
+      return addToStorage(movieObj, 'watched');
+    }
   }
 
   window.addEventListener('keydown', closeModalHandler);

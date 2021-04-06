@@ -35,9 +35,6 @@ function openModal(event) {
             window.removeEventListener('keydown', closeModalHandler);
           }
         }
-        // ability to add a "close modal button"
-        //       const closeBtn = document.querySelector(".modal-close-btn");
-        //   closeBtn.addEventListener("click", closeModal);
       }
     }),
   );
