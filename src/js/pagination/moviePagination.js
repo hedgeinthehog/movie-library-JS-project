@@ -4,7 +4,7 @@ import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import modalMovieCardTemplate from '../../templates/modal.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
 import switchErrorHide from '../movieHelpers/switchError';
-import getFromStorage from '../getFromStorage/getFromStorage';
+import getFromStorage from '../localStoragemovies/getFromStorage';
 
 class MoviePagination {
   #movies = [];
@@ -37,7 +37,7 @@ class MoviePagination {
   // gets list of genres from the server and shows the first page of trending movies
   init() {
     this.getAllGenres();
-    this.loadPage();
+    this.forLibraryFlag ? this.paginateLibrary() : this.loadPage();
   }
 
   // shows the page of movies
@@ -56,8 +56,8 @@ class MoviePagination {
     } else {
       this.rowsPerLibraryPage = 4;
     }
-    this.getAllGenres();
-    this.fetchMovies().then(data => {
+
+    return this.fetchMovies().then(data => {
       this.prepareMovies();
       this.renderlibraryPage();
     });
@@ -66,11 +66,14 @@ class MoviePagination {
   // renders My Library Watched/Queued movies
   renderlibraryPage() {
     const rowsPerPage = this.rowsPerLibraryPage;
+    if (this.totalPages < this.currentPage) this.currentPage = this.totalPages;
+
     let loopStart = rowsPerPage * (this.currentPage - 1);
     let loopEnd = loopStart + rowsPerPage;
     let paginatedItems = this.#movies.slice(loopStart, loopEnd);
-    this.setPageNumbers();
+
     this.element.innerHTML = moviesListTemplate(paginatedItems);
+    this.setPageNumbers();
   }
 
   //fetch trending or searching movies by byQueryFlag value
