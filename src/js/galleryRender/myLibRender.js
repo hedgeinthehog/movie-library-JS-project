@@ -54,10 +54,12 @@ function openModal(event) {
 
   const modal = basicLightbox.create(markup);
   modal.show();
+  const closeBtn = document.querySelector('.modal-close-btn');
 
   enableModalMovieCardBtns(movie, movieTitle, movie.forLibraryFlag);
 
   window.addEventListener('keydown', closeModalHandler);
+  closeBtn.addEventListener('click', () => modal.close());
 
   function closeModalHandler(event) {
     //close modal and remove event listeners
