@@ -2,13 +2,10 @@ import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import {addToStorage, 
-  resetStorage, 
-  removeFromStorage, 
+import {addToStorage,  
   filmInQueue, 
   filmInWatched} from '../addToStorage/addToStorage';
 
-// resetStorage();
 const { 
   prevRef, 
   nextRef, 
@@ -51,6 +48,7 @@ function requestMovie() {
 }
 
 function openModal(event) {
+  //open modal card of film
   event.preventDefault();
   const { target } = event;
   const movieTitle = target.alt;
@@ -66,47 +64,60 @@ function openModal(event) {
   addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
 
   if(filmInQueue(movieObj)){
-    const expanded = addToQueueBtnRef.getAttribute("aria-expanded") === "true" || false;
-    togleTexstContentQueue(expanded);
-    addToQueueBtnRef.setAttribute("aria-expanded", !expanded);
+    addToQueueBtnRef.textContent = 'remove from queue';
+    addToWatchedBtnRef.textContent = 'add to watched';
   }
   if(filmInWatched(movieObj)){
-    const expanded = addToWatchedBtnRef.getAttribute("aria-expanded") === "true" || false;
-    console.log(expanded)
-    togleTexstContentWatched(expanded);
-    addToWatchedBtnRef.setAttribute("aria-expanded", !expanded);
+    addToWatchedBtnRef.textContent = 'remove from watched';
+    addToQueueBtnRef.textContent = 'add to queue';
   }
 
   function addToQueueOnClick(){
-    const expanded = addToQueueBtnRef.getAttribute("aria-expanded") === "true" || false;
-    addToStorage(movieObj, 'queue');
-    togleTexstContentQueue(expanded);
-    addToQueueBtnRef.setAttribute("aria-expanded", !expanded);
-  }
-  function togleTexstContentQueue(expanded){
-    if(!expanded) return addToQueueBtnRef.textContent = 'add to queue';
-     else return addToQueueBtnRef.textContent = 'remove from queue';
+    //add and remove film from queue and change buttons text
+    if(!filmInQueue(movieObj) && !filmInWatched(movieObj)){
+      addToQueueBtnRef.textContent = 'remove from queue';
+      addToWatchedBtnRef.textContent = 'add to watched';
+      return addToStorage(movieObj, 'queue');
+    }
+    if(filmInQueue(movieObj) && !filmInWatched(movieObj)){
+      addToQueueBtnRef.textContent = 'add to queue';
+      addToWatchedBtnRef.textContent = 'add to watched';
+      return addToStorage(movieObj, 'queue');
+    }
+   if(!filmInQueue(movieObj) && filmInWatched(movieObj)){
+     addToQueueBtnRef.textContent = 'remove from queue';
+     addToWatchedBtnRef.textContent = 'add to watched';
+     return addToStorage(movieObj, 'queue');
+   }
   }
 
-  
   function addToWatchedOnClick(){
-    const expanded = addToWatchedBtnRef.getAttribute("aria-expanded") === "true" || false;
-    addToStorage(movieObj, 'watched');
-    togleTexstContentWatched(expanded);
-    addToWatchedBtnRef.setAttribute("aria-expanded", !expanded);
-  }
-  function togleTexstContentWatched(expanded){
-    if(expanded) return addToWatchedBtnRef.textContent = 'add to watched';
-     else return addToWatchedBtnRef.textContent = 'remove from watched';
+     //add and remove film from watched and change buttons text
+    if(!filmInQueue(movieObj) && !filmInWatched(movieObj)){
+      addToWatchedBtnRef.textContent = 'remove from watched';
+      addToQueueBtnRef.textContent = 'add to queue';
+      return addToStorage(movieObj, 'watched');
+    }
+    if(filmInWatched(movieObj) && !filmInQueue(movieObj)){
+      addToWatchedBtnRef.textContent = 'add to watched';
+      addToQueueBtnRef.textContent = 'add to queue';
+      return addToStorage(movieObj, 'watched');
+    }
+     if(!filmInWatched(movieObj) && filmInQueue(movieObj)){
+       addToWatchedBtnRef.textContent = 'remove from watched';
+       addToQueueBtnRef.textContent = 'add to queue';
+       return addToStorage(movieObj, 'watched');
+     }
   }
 
   window.addEventListener('keydown', closeModalHandler);
 
   function closeModalHandler(event) {
+    //close modal and remove event listeners
     if (event.code === 'Escape') {
       modal.close();
-      // addToQueueBtnRef.removeEventListener('click', addToQueueOnClick);
-      // addToWatchedBtnRef.removeEventListener('click', addToWatchedOnClick);
+      addToQueueBtnRef.removeEventListener('keydown', addToQueueOnClick);
+      addToWatchedBtnRef.removeEventListener('keydown', addToWatchedOnClick);
       window.removeEventListener('keydown', closeModalHandler);
     }
   }

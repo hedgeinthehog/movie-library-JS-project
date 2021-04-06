@@ -60,49 +60,20 @@ function addToStorage(filmObj, filmType) {
 }
 
 //Функция для очистки localStorage
-
 const resetStorage = function () {
   localStorage.removeItem('watched');
   localStorage.removeItem('queue');
 };
 
-function removeFromStorage(filmObj, filmType){
-  const [watched, queue] = getCurrentStorage();
-
-  switch (filmType) {
-    case 'watched':
-      if (watched.includes(filmObj.id)) {
-        const filteredWatched = watched.filter(filmId => {
-          return filmId !== filmObj.id;
-        });
-        localStorage.setItem('watched', JSON.stringify(filteredWatched));
-      } else {
-        console.log('In Watched is no such film!')
-      }
-      break;
-    case 'queue':
-      if (queue.includes(filmObj.id)) {
-        const filteredQueue = queue.filter(filmId => {
-          return filmId !== filmObj.id;
-        });
-        console.log(filmObj);
-        localStorage.setItem('queue', JSON.stringify(filteredQueue));
-      } else {
-        console.log(filmObj);
-        console.log('In Queue is no such film!')
-      }
-      break;
-    default:
-      console.log('Film type is not correct!');
-  }
-}
-
+// проверка пренидлежит ли фильм к watched
 function filmInWatched(filmObj){
   const [watched, queue] = getCurrentStorage();
   const includeInWatched = watched.includes(filmObj.id);
   if (includeInWatched) return true;
   else return false;
 }
+
+// проверка пренидлежит ли фильм к queue
 function filmInQueue(filmObj){
   const [watced, queue] = getCurrentStorage();
   const includeInQueue = queue.includes(filmObj.id);
@@ -110,4 +81,4 @@ function filmInQueue(filmObj){
   else return false;
 }
 
-export { addToStorage, resetStorage, removeFromStorage, filmInQueue, filmInWatched};
+export { addToStorage, resetStorage, filmInQueue, filmInWatched};
