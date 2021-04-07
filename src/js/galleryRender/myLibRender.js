@@ -33,6 +33,7 @@ function showQueueOnClick() {
   movie.paginateLibrary();
   queueBtnRef.classList.add('is-active');
   watchedBtnRef.classList.remove('is-active');
+  loaderRef.classList.add('visually-hidden');
 }
 function showWatchedOnClick() {
   //function thats shown films from wathed from lockalStorage
@@ -40,6 +41,7 @@ function showWatchedOnClick() {
   movie.paginateLibrary();
   watchedBtnRef.classList.add('is-active');
   queueBtnRef.classList.remove('is-active');
+  loaderRef.classList.add('visually-hidden');
 }
 
 function openModal(event) {
