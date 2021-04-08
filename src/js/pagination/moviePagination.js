@@ -1,5 +1,5 @@
 import api from '../api/apiFetching';
-import moviesListTemplate from '../../templates/galleryCardTemplate.hbs';
+import moviesListTemplate from '../../templates/gallery-card-template.hbs';
 import pageNumetationTemplate from '../../templates/page-numeration.hbs';
 import modalMovieCardTemplate from '../../templates/modal.hbs';
 import { generatePosterPath } from '../movieHelpers/generatePoster';
