@@ -17,7 +17,7 @@ moviesListRef.addEventListener('click', openModal);
 
 function onPressEnterSearch(event) {
   //do search on Enter press
-  if (event.code === 'Enter') {
+  if (event.keyCode === 13) {
     event.preventDefault();
     requestMovie();
   }
