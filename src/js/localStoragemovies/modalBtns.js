@@ -95,7 +95,6 @@ function openModal(event, movie) {
 
   function closeModalHandler(event) {
     //close modal and remove event listeners
-    console.log(event);
     if (event.code === 'Escape' || event.target === event.currentTarget) {
       modal.close();
       const scrollY = document.body.style.top;
