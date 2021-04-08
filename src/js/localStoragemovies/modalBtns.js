@@ -1,14 +1,33 @@
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 import {
   addToStorage,
   filmInQueue,
   filmInWatched,
 } from '../localStoragemovies/addToStorage';
 
-function enableModalMovieCardBtns(movie, movieTitle, libraryFlag = false) {
+function openModal(event, movie) {
+  //open modal card of film
+  event.preventDefault();
+  document.body.style.overflow = 'hidden';
+  document.body.style.top = `-${window.scrollY}px`;
+
+  const { target } = event;
+  const movieTitle = target.alt;
+  if (!movieTitle) {
+    return;
+  }
+  const markup = movie.renderMovieCard(movieTitle);
+
+  const modal = basicLightbox.create(markup);
+  modal.show();
+  const closeBtn = document.querySelector('.modal-close-btn');
+
   const movieObj = movie.findMovieForLocalStorage(movieTitle);
 
   const addToQueueBtnRef = document.querySelector('#add-to-queue-btn');
   const addToWatchedBtnRef = document.querySelector('#add-to-watched-btn');
+  const lightboxOverlayRef = document.querySelector('.basicLightbox');
   addToQueueBtnRef.addEventListener('click', addToQueueOnClick);
   addToWatchedBtnRef.addEventListener('click', addToWatchedOnClick);
 
@@ -70,6 +89,25 @@ function enableModalMovieCardBtns(movie, movieTitle, libraryFlag = false) {
       return;
     }
   }
+  window.addEventListener('keydown', closeModalHandler);
+  lightboxOverlayRef.addEventListener('click', closeModalHandler);
+  closeBtn.addEventListener('click', () => modal.close());
+
+  function closeModalHandler(event) {
+    //close modal and remove event listeners
+    console.log(event);
+    if (event.code === 'Escape' || event.target === event.currentTarget) {
+      modal.close();
+      const scrollY = document.body.style.top;
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      document.body.style.overflow = 'auto';
+
+      addToQueueBtnRef.removeEventListener('keydown', addToQueueOnClick);
+      addToWatchedBtnRef.removeEventListener('keydown', addToWatchedOnClick);
+      window.removeEventListener('keydown', closeModalHandler);
+      lightboxOverlayRef.removeEventListener('click', closeModalHandler);
+    }
+  }
 }
 
-export default enableModalMovieCardBtns;
+export default openModal;

@@ -1,8 +1,6 @@
 import MoviePagination from '../pagination/moviePagination';
 import refs from '../refs';
-import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css';
-import enableModalMovieCardBtns from '../localStoragemovies/modalBtns';
+import openModal from '../localStoragemovies/modalBtns';
 
 const {
   watchedBtnRef,
@@ -25,7 +23,7 @@ nextRef.addEventListener('click', movie.goToNextPage);
 pageNumsRef.addEventListener('click', movie.goToPage);
 watchedBtnRef.addEventListener('click', showWatchedOnClick);
 queueBtnRef.addEventListener('click', showQueueOnClick);
-moviesListRef.addEventListener('click', openModal);
+moviesListRef.addEventListener('click', onOpenModal);
 
 function showQueueOnClick() {
   //function thats shown films from queue from lockalStorage
@@ -44,32 +42,6 @@ function showWatchedOnClick() {
   loaderRef.classList.add('visually-hidden');
 }
 
-function openModal(event) {
-  //open modal card of film
-  event.preventDefault();
-  const { target } = event;
-  const movieTitle = target.alt;
-  if (!movieTitle) {
-    return;
-  }
-  const markup = movie.renderMovieCard(movieTitle);
-
-  const modal = basicLightbox.create(markup);
-  modal.show();
-  const closeBtn = document.querySelector('.modal-close-btn');
-
-  enableModalMovieCardBtns(movie, movieTitle, movie.forLibraryFlag);
-
-  window.addEventListener('keydown', closeModalHandler);
-  closeBtn.addEventListener('click', () => modal.close());
-
-  function closeModalHandler(event) {
-    //close modal and remove event listeners
-    if (event.code === 'Escape') {
-      modal.close();
-      addToQueueBtnRef.removeEventListener('keydown', addToQueueOnClick);
-      addToWatchedBtnRef.removeEventListener('keydown', addToWatchedOnClick);
-      window.removeEventListener('keydown', closeModalHandler);
-    }
-  }
+function onOpenModal(event) {
+  openModal(event, movie);
 }
