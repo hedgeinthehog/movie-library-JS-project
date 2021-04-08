@@ -318,6 +318,13 @@ class MoviePagination {
       return;
     }
 
+    // if (window.screen.width < 768) {
+    //   for (let i = currentPage; i < this.totalPages + 1; i++) {
+    //     this.pageNumsRef.append(this.createPageButton(i));
+    //   }
+    //   return;
+    // }
+
     this.pageNumsRef.innerHTML = pageNumetationTemplate({
       firstPage,
       lastPage,
@@ -335,8 +342,24 @@ class MoviePagination {
 
     this.middlePageNumsRef = document.querySelector('.middle-page-numbers');
 
+    if (window.screen.width < 768) {
+      if (currentPage <= 3) {
+        for (let page = 1; page < 6; page++) {
+          this.middlePageNumsRef.append(this.createPageButton(page));
+        }
+        return;
+      }
+      if (currentPage > pagesTotal - 3) {
+        for (let page = pagesTotal - 4; page < pagesTotal; page++) {
+          this.middlePageNumsRef.append(this.createPageButton(page));
+        }
+        return;
+      }
+    }
+
     if (currentPage <= 4) {
       this.pageNumsRef.querySelector('.pre-separator').classList.add('hidden');
+
       for (let page = 2; page < 7; page++) {
         this.middlePageNumsRef.append(this.createPageButton(page));
       }
