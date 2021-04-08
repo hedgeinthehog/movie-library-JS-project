@@ -20,12 +20,13 @@
 
 // button in modal window
 
-.add-to-watched-btn:hover, .add-to-queue-btn:hover{
+.add-to-watched-btn:hover,
+.add-to-queue-btn:hover {
   color: $white;
   border-color: $accent-color;
 }
-.modal-btn::before{
-  content: "";
+.modal-btn::before {
+  content: '';
   position: absolute;
   left: 0;
   width: 100%;
@@ -41,23 +42,26 @@
 }
 .add-to-queue-btn::before {
   bottom: 0;
-  border-radius: 50% 50% 0 0 ;
+  border-radius: 50% 50% 0 0;
   height: 0%;
 }
-.add-to-watched-btn:hover:before, .add-to-queue-btn:hover::before {
+.add-to-watched-btn:hover:before,
+.add-to-queue-btn:hover::before {
   height: 180%;
 }
 
 .btn-wached,
 .btn-queue {
+  min-width: 130px;
   color: $white;
   border-color: $white;
 }
-.btn-wached:hover, .btn-queue:hover {
+.btn-wached:hover,
+.btn-queue:hover {
   border-color: $accent-color;
 }
-.modal-btn::before{
-  content: "";
+.modal-btn::before {
+  content: '';
   position: absolute;
   left: 0;
   width: 100%;
@@ -73,10 +77,11 @@
 }
 .btn-queue::before {
   bottom: 0;
-  border-radius: 50% 50% 0 0 ;
+  border-radius: 50% 50% 0 0;
   height: 0%;
 }
-.btn-wached:hover:before, .btn-queue:hover::before {
+.btn-wached:hover:before,
+.btn-queue:hover::before {
   height: 180%;
 }
 
