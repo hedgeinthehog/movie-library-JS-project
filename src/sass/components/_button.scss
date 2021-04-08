@@ -79,40 +79,6 @@
 .btn-wached:hover:before, .btn-queue:hover::before {
   height: 180%;
 }
-// .modal-btn {
-//   font-family: inherit;
-//   font-weight: 500;
-//   font-size: 12px;
-//   line-height: 1.333;
-//   text-align: center;
-//   text-transform: uppercase;
-//   color: $white;
-//   background-color: transparent;
-//   min-width: 130px;
-//   height: 44px;
-//   border: 1px solid $white;
-//   border-radius: 5px;
-//   padding: 14px 36px 12px 36px;
-//   cursor: pointer;
-//   transition: all 0.2s ease-out;
-//   &:not(:last-child) {
-//     margin-right: 19.94px;
-//   }
-
-//   &.light-theme-btn {
-//     color: $dark;
-//     border: 1px solid $dark;
-//   }
-
-//   &:hover,
-//   &:focus {
-//     color: $white;
-//     background-color: $avg-rating-color;
-//     outline: none;
-//     border: none;
-//     box-shadow: (0px 8px 43px rgba(255, 107, 1, 0.6));
-//   }
-// }
 
 .is-active {
   background-color: $avg-rating-color;
