@@ -318,13 +318,6 @@ class MoviePagination {
       return;
     }
 
-    // if (window.screen.width < 768) {
-    //   for (let i = currentPage; i < this.totalPages + 1; i++) {
-    //     this.pageNumsRef.append(this.createPageButton(i));
-    //   }
-    //   return;
-    // }
-
     this.pageNumsRef.innerHTML = pageNumetationTemplate({
       firstPage,
       lastPage,
