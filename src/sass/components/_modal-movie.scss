@@ -130,6 +130,7 @@
 .modal-buttons {
   display: flex;
   justify-content: center;
+  height: 44px;
   margin-top: 20px;
 
   & > .modal-btn:not(:last-child) {
