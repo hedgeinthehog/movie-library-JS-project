@@ -1,0 +1,13 @@
+{{#each this}}
+    <li class="list list-item" tabindex="0">
+        <img
+            src="{{poster_path}}"
+            alt="{{title}}"
+            class="poster-img"
+        />        
+        <div class="movie-card-short-info">
+            <h2 class="movie-card-title">{{title}}</h2>
+            <p class="movie-card-text">{{genres}} | {{release_date}} <span class="avg-rating">{{vote_average}}</span></p>
+        </div>
+    </li>
+{{/each}}

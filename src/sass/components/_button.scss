@@ -1,0 +1,103 @@
+.modal-btn {
+  border: 1px solid $dark;
+  background: transparent;
+  padding: 14px 36px 12px 36px;
+  font-size: 12px;
+  font-family: inherit;
+  line-height: 1.333;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: $dark;
+  border-radius: 5px;
+  transition: 0.8s;
+  position: relative;
+  overflow: hidden;
+  z-index: 50;
+  &:not(:last-child) {
+    margin-right: 19.94px;
+  }
+}
+
+// button in modal window
+
+.add-to-watched-btn:hover,
+.add-to-queue-btn:hover {
+  color: $white;
+  border-color: $accent-color;
+}
+.modal-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: $accent-color;
+  z-index: -1;
+  transition: 0.8s;
+}
+.add-to-watched-btn::before {
+  top: 0;
+  border-radius: 0 0 50% 50%;
+  height: 0%;
+}
+.add-to-queue-btn::before {
+  bottom: 0;
+  border-radius: 50% 50% 0 0;
+  height: 0%;
+}
+.add-to-watched-btn:hover:before,
+.add-to-queue-btn:hover::before {
+  height: 180%;
+}
+
+.btn-wached,
+.btn-queue {
+  min-width: 130px;
+  color: $white;
+  border-color: $white;
+}
+.btn-wached:hover,
+.btn-queue:hover {
+  border-color: $accent-color;
+}
+.modal-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: $accent-color;
+  z-index: -1;
+  transition: 0.8s;
+}
+.btn-wached::before {
+  top: 0;
+  border-radius: 0 0 50% 50%;
+  height: 0%;
+}
+.btn-queue::before {
+  bottom: 0;
+  border-radius: 50% 50% 0 0;
+  height: 0%;
+}
+.btn-wached:hover:before,
+.btn-queue:hover::before {
+  height: 180%;
+}
+
+.is-active {
+  background-color: $avg-rating-color;
+  outline: none;
+  border: none;
+  box-shadow: (0px 8px 43px rgba(255, 107, 1, 0.6));
+}
+
+@media screen and (min-width: 768px) {
+  .modal-btn {
+    width: 136px;
+    padding: 14px 38px 12px 38px;
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+}

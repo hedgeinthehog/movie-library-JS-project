@@ -1,0 +1,30 @@
+//utils
+@import './utils/variables';
+@import './utils/placeholders';
+@import './utils/visually-hidden';
+
+//base
+@import './base/common';
+@import './base/container';
+
+//components
+@import './components/section';
+@import './components/button';
+@import './components/logo';
+@import './components/accent';
+@import './components/page-numeration';
+@import './components/loader';
+@import './components/modal-movie';
+
+//layout
+@import './layout/header-base-style';
+@import './layout/switch-theme';
+@import './layout/header-home';
+@import './layout/header-library';
+@import './layout/gallery';
+
+//footer
+@import './layout/team-modal';
+@import './layout/footer';
+@import './layout/btn-to-top';
+@import './layout/cursor';

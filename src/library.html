@@ -13,12 +13,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css"
       rel="stylesheet"
     />
-    <title>Filmoteka</title>
+    <title>Filmoteka - My Library</title>
   </head>
 
   <body>
     <header>
-      <div class="header">
+      <div class="header header-library">
         <div class="container">
           <nav class="header-nav">
             <a class="header-logo logo" href="./index.html">
@@ -29,35 +29,19 @@
             </a>
             <ul class="header-list list">
               <li class="header-list-item">
-                <a class="header-list-link link current" href="./index.html"
-                  >Home</a
-                >
+                <a class="header-list-link link" href="./index.html">Home</a>
               </li>
               <li class="header-list-item">
-                <a class="header-list-link link" href="./library.html"
+                <a class="header-list-link link current" href="./library.html"
                   >my library</a
                 >
               </li>
             </ul>
           </nav>
-          <form class="search-form">
-            <input
-              class="search-input js-search-input"
-              type="text"
-              id="search-input"
-              name="query"
-              placeholder="Search film"
-            />
-            <label class="search-form-label" for="search-input"
-              >Search film
-            </label>
-            <svg class="search-icon" width="12px" height="12px">
-              <use href="./images/icons/sprite.svg#search"></use>
-            </svg>
-          </form>
-          <p class="error visually-hidden" id="error">
-            Search result not successful
-          </p>
+          <div class="button-wrapper">
+            <button class="modal-btn btn-wached is-active" id="watched" type="button">Watched</button>
+            <button class="modal-btn btn-queue" id="queue" type="button">Queue</button>
+          </div>
           <div class="switch-box box-3">
             <div class="toggle-switch">
               <input type="checkbox" class="theme-switch-toggle" />
@@ -124,7 +108,7 @@
           <div class="developers">
             <p>
               Developed with&nbsp
-              <svg class="footer-hart" width="14" height="13">
+              <svg class="footer-hart">
                 <use href="./images/icons/sprite.svg#heart"></use>
               </svg>
               &nbspby

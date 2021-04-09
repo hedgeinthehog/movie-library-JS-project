@@ -1,0 +1,37 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $main-font;
+  font-style: normal;
+}
+body.light-theme {
+  background-color: #fff;
+  color: #333333;
+  transition: all 800ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+body.dark-theme {
+  background-color: #333333;
+  color: rgb(255, 255, 255);
+  transition: all 800ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.list {
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+}
