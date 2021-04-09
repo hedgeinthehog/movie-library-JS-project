@@ -98,9 +98,8 @@ function openModal(event, movie) {
     if (
       event.code === 'Escape' ||
       event.target === event.currentTarget ||
-      event.target.classList.contains(
-        'modal-close-btn' || 'modal-close-btn-line',
-      )
+      event.target.classList.contains('modal-close-btn') ||
+      event.target.classList.contains('modal-close-btn-line')
     ) {
       modal.close();
       const scrollY = document.body.style.top;
