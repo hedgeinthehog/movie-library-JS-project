@@ -6,7 +6,7 @@ import {
   filmInWatched,
 } from '../localStoragemovies/addToStorage';
 
-function openModal(event, movie) {
+function openModal(event, movie, libraryFlag = false) {
   //open modal card of film
   event.preventDefault();
   document.body.style.overflow = 'hidden';

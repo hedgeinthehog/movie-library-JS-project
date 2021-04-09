@@ -11,6 +11,7 @@ const {
   pageNumsRef,
   moviesListRef,
 } = refs;
+const libraryFlag = true;
 
 const movie = new MoviePagination('.movies-list');
 
@@ -43,5 +44,5 @@ function showWatchedOnClick() {
 }
 
 function onOpenModal(event) {
-  openModal(event, movie);
+  openModal(event, movie, libraryFlag);
 }
